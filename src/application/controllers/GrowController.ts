@@ -1,9 +1,3 @@
-import { CreateGrowService } from 'src/core/domain/grow/CreateGrowService';
-import { FilterGrowService } from 'src/core/domain/grow/FilterGrowService';
-import { GetByIdGrowService } from 'src/core/domain/grow/GetByIdGrowService';
-import { UpdateGrowService } from 'src/core/domain/grow/UpdateGrowService';
-import { DeleteGrowService } from 'src/core/domain/grow/DeleteGrowService';
-
 import { CreateGrowBody } from '../../core/dtos/grow/CreateGrowBody';
 import { UpdateGrowBody } from '../../core/dtos/grow/UpdateGrowBody';
 import { FilterGrowBody } from 'src/core/dtos/grow/FilterGrowBody';
@@ -19,21 +13,16 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
+import { GrowService } from 'src/core/domain/grow/GrowService';
 
 @Controller('grows')
 export class GrowController {
-  constructor(
-    private readonly createGrowService: CreateGrowService,
-    private readonly updateGrowService: UpdateGrowService,
-    private readonly filterGrowService: FilterGrowService,
-    private readonly deleteGrowService: DeleteGrowService,
-    private readonly getByIdGrowService: GetByIdGrowService,
-  ) {}
+  constructor(private readonly growService: GrowService) {}
 
   @Post()
   async createGrow(@Body() data: CreateGrowBody) {
-    return await this.createGrowService
-      .handle(data)
+    return await this.growService
+      .createGrow(data)
       .then((res) => {
         return res;
       })
@@ -53,8 +42,8 @@ export class GrowController {
 
   @Get()
   async getGrows(@Body() filter: FilterGrowBody) {
-    return await this.filterGrowService
-      .handle(filter)
+    return await this.growService
+      .getGrows(filter)
       .then((res) => {
         return res;
       })
@@ -74,8 +63,8 @@ export class GrowController {
 
   @Get(':grow_id')
   async getGrowById(@Param('grow_id', ParseIntPipe) grow_id: number) {
-    return await this.getByIdGrowService
-      .handle(grow_id)
+    return await this.growService
+      .getGrowById(grow_id)
       .then((res) => {
         if (!res)
           throw new HttpException(
@@ -107,8 +96,8 @@ export class GrowController {
     @Param('grow_id', ParseIntPipe) grow_id: number,
     @Body() data: UpdateGrowBody,
   ) {
-    return await this.updateGrowService
-      .handle(grow_id, data)
+    return await this.growService
+      .updateGrow(grow_id, data)
       .then((res) => {
         return res;
       })
@@ -128,8 +117,8 @@ export class GrowController {
 
   @Delete(':grow_id')
   async deleteGrow(@Param('grow_id', ParseIntPipe) grow_id: number) {
-    return await this.deleteGrowService
-      .handle(grow_id)
+    return await this.growService
+      .deleteGrow(grow_id)
       .then((res) => {
         return res;
       })
