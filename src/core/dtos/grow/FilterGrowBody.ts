@@ -1,4 +1,4 @@
-export class GetGrowBody {
+export class FilterGrowBody {
   name: string;
 
   width: number;
