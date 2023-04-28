@@ -1,3 +1,3 @@
-import { Repository } from './repository';
+import { Repository } from './Repository';
 
 export abstract class GrowRepository extends Repository {}
