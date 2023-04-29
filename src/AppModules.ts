@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { GrowModule } from './core/modules/GrowModule';
+import { GrowModule } from './modules/grows';
 
 @Module({
   imports: [GrowModule],
