@@ -1,6 +1,6 @@
-import { CreateGrowBody } from '../../core/dtos/grow/CreateGrowBody';
-import { UpdateGrowBody } from '../../core/dtos/grow/UpdateGrowBody';
-import { FilterGrowBody } from 'src/core/dtos/grow/FilterGrowBody';
+import { CreateBody } from '../../core/dtos/grow/CreateBody';
+import { UpdateBody } from '../../core/dtos/grow/UpdateBody';
+import { FilterBody } from '../../core/dtos/grow/FilterBody';
 import {
   Body,
   Controller,
@@ -13,16 +13,16 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { GrowService } from 'src/core/domain/grow/GrowService';
+import { Service } from '../../core/domain/Service';
 
 @Controller('grows')
 export class GrowController {
-  constructor(private readonly growService: GrowService) {}
+  constructor(private readonly service: Service) {}
 
   @Post()
-  async createGrow(@Body() data: CreateGrowBody) {
-    return await this.growService
-      .createGrow(data)
+  async create(@Body() data: CreateBody) {
+    return await this.service
+      .create(data)
       .then((res) => {
         return res;
       })
@@ -41,9 +41,9 @@ export class GrowController {
   }
 
   @Get()
-  async getGrows(@Body() filter: FilterGrowBody) {
-    return await this.growService
-      .getGrows(filter)
+  async get(@Body() filter: FilterBody) {
+    return await this.service
+      .get(filter)
       .then((res) => {
         return res;
       })
@@ -62,9 +62,9 @@ export class GrowController {
   }
 
   @Get(':grow_id')
-  async getGrowById(@Param('grow_id', ParseIntPipe) grow_id: number) {
-    return await this.growService
-      .getGrowById(grow_id)
+  async getById(@Param('grow_id', ParseIntPipe) grow_id: number) {
+    return await this.service
+      .getById(grow_id)
       .then((res) => {
         if (!res)
           throw new HttpException(
@@ -92,12 +92,12 @@ export class GrowController {
   }
 
   @Put(':grow_id')
-  async updateGrow(
+  async update(
     @Param('grow_id', ParseIntPipe) grow_id: number,
-    @Body() data: UpdateGrowBody,
+    @Body() data: UpdateBody,
   ) {
-    return await this.growService
-      .updateGrow(grow_id, data)
+    return await this.service
+      .update(grow_id, data)
       .then((res) => {
         return res;
       })
@@ -116,9 +116,9 @@ export class GrowController {
   }
 
   @Delete(':grow_id')
-  async deleteGrow(@Param('grow_id', ParseIntPipe) grow_id: number) {
-    return await this.growService
-      .deleteGrow(grow_id)
+  async delete(@Param('grow_id', ParseIntPipe) grow_id: number) {
+    return await this.service
+      .delete(grow_id)
       .then((res) => {
         return res;
       })

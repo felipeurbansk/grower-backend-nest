@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { GrowRepository } from 'src/core/repositories/GrowRepository';
+import { GrowRepository } from '../repositories/GrowRepository';
 
 @Injectable()
-export class GetByIdGrowService {
+export class DeleteService {
   constructor(private readonly grow: GrowRepository) {}
 
   async handle(grow_id: number): Promise<any> {
-    return await this.grow.getById(grow_id);
+    return await this.grow.delete(grow_id);
   }
 }

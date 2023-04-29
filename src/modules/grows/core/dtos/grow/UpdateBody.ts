@@ -1,4 +1,4 @@
-export class UpdateGrowBody {
+export class UpdateBody {
   name: string;
 
   width: number;

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { GrowRepository } from 'src/core/repositories/GrowRepository';
+import { GrowRepository } from '../repositories/GrowRepository';
 
 @Injectable()
-export class UpdateGrowService {
+export class UpdateService {
   constructor(private readonly grow: GrowRepository) {}
 
   async handle(grow_id: number, data: any): Promise<any> {

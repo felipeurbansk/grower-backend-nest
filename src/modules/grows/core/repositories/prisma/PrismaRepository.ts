@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/infra/database/PrismaService';
 
 @Injectable()
-export class PrismaGrowRepository implements GrowRepository {
+export class PrismaRepository implements GrowRepository {
   constructor(private prisma: PrismaService) {}
 
   async create(data: any): Promise<any> {

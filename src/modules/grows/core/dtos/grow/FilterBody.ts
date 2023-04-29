@@ -1,4 +1,4 @@
-export class FilterGrowBody {
+export class FilterBody {
   name: string;
 
   width: number;

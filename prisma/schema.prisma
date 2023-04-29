@@ -18,3 +18,23 @@ model Grows {
   depth Int
   status String?
 }
+
+model Seeds {
+  id Int @default(autoincrement()) @id
+  name String
+  bank_name String?
+  thc Int?
+  cbd Int?
+  vegetative_weeks Int?
+  flowering_weeks Int?
+  per_square_meter Int?
+  status String?
+}
+
+model Lights {
+  id Int @default(autoincrement()) @id
+  name String
+  watts Int?
+  lumens Int?
+  status String?
+}
