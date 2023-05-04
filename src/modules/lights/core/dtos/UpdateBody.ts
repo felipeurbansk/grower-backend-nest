@@ -1,9 +1,12 @@
+import { IsNumber, IsString } from 'class-validator';
+
 export class UpdateBody {
+  @IsString()
   name: string;
 
-  width: number;
+  @IsNumber()
+  watts: number;
 
-  depth: number;
-
-  height: number;
+  @IsNumber()
+  lumens: number;
 }

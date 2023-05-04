@@ -1,6 +1,6 @@
-import { CreateBody } from '../../core/dtos/CreateBody';
-import { UpdateBody } from '../../core/dtos/UpdateBody';
-import { FilterBody } from '../../core/dtos/FilterBody';
+import { CreateBody } from '../core/dtos/CreateBody';
+import { UpdateBody } from '../core/dtos/UpdateBody';
+import { FilterBody } from '../core/dtos/FilterBody';
 import {
   Body,
   Controller,
@@ -13,10 +13,10 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { Service } from '../../core/domain/Service';
+import { Service } from '../core/domain/Service';
 
-@Controller('lights')
-export class LightController {
+@Controller('seeds')
+export class Controllers {
   constructor(private readonly service: Service) {}
 
   @Post()
@@ -30,7 +30,7 @@ export class LightController {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when create new lights.`,
+            error: `Error when create new seeds.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -51,7 +51,7 @@ export class LightController {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all lights.`,
+            error: `Error when get all seeds.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -61,16 +61,16 @@ export class LightController {
       });
   }
 
-  @Get(':light_id')
-  async getById(@Param('light_id', ParseIntPipe) light_id: number) {
+  @Get(':seed_id')
+  async getById(@Param('seed_id', ParseIntPipe) seed_id: number) {
     return await this.service
-      .getById(light_id)
+      .getById(seed_id)
       .then((res) => {
         if (!res)
           throw new HttpException(
             {
               status: HttpStatus.NOT_FOUND,
-              error: `light with id ${light_id} not found.`,
+              error: `seed with id ${seed_id} not found.`,
             },
             HttpStatus.NOT_FOUND,
           );
@@ -81,7 +81,7 @@ export class LightController {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all lights.`,
+            error: `Error when get all seeds.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -91,13 +91,13 @@ export class LightController {
       });
   }
 
-  @Put(':light_id')
+  @Put(':seed_id')
   async update(
-    @Param('light_id', ParseIntPipe) light_id: number,
+    @Param('seed_id', ParseIntPipe) seed_id: number,
     @Body() data: UpdateBody,
   ) {
     return await this.service
-      .update(light_id, data)
+      .update(seed_id, data)
       .then((res) => {
         return res;
       })
@@ -105,7 +105,7 @@ export class LightController {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when updating light with id ${light_id}.`,
+            error: `Error when updating seed with id ${seed_id}.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -115,10 +115,10 @@ export class LightController {
       });
   }
 
-  @Delete(':light_id')
-  async delete(@Param('light_id', ParseIntPipe) light_id: number) {
+  @Delete(':seed_id')
+  async delete(@Param('seed_id', ParseIntPipe) seed_id: number) {
     return await this.service
-      .delete(light_id)
+      .delete(seed_id)
       .then((res) => {
         return res;
       })
@@ -126,7 +126,7 @@ export class LightController {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when delete light with id ${light_id}.`,
+            error: `Error when delete seed with id ${seed_id}.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {

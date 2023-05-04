@@ -1,6 +1,6 @@
-import { CreateBody } from '../../core/dtos/grow/CreateBody';
-import { UpdateBody } from '../../core/dtos/grow/UpdateBody';
-import { FilterBody } from '../../core/dtos/grow/FilterBody';
+import { CreateBody } from '../core/dtos/CreateBody';
+import { UpdateBody } from '../core/dtos/UpdateBody';
+import { FilterBody } from '../core/dtos/FilterBody';
 import {
   Body,
   Controller,
@@ -13,10 +13,10 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { Service } from '../../core/domain/Service';
+import { Service } from '../core/domain/Service';
 
-@Controller('grows')
-export class GrowController {
+@Controller('lights')
+export class Controllers {
   constructor(private readonly service: Service) {}
 
   @Post()
@@ -30,7 +30,7 @@ export class GrowController {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when create new grows.`,
+            error: `Error when create new lights.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -51,7 +51,7 @@ export class GrowController {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all grows.`,
+            error: `Error when get all lights.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -61,16 +61,16 @@ export class GrowController {
       });
   }
 
-  @Get(':grow_id')
-  async getById(@Param('grow_id', ParseIntPipe) grow_id: number) {
+  @Get(':light_id')
+  async getById(@Param('light_id', ParseIntPipe) light_id: number) {
     return await this.service
-      .getById(grow_id)
+      .getById(light_id)
       .then((res) => {
         if (!res)
           throw new HttpException(
             {
               status: HttpStatus.NOT_FOUND,
-              error: `Grow with id ${grow_id} not found.`,
+              error: `light with id ${light_id} not found.`,
             },
             HttpStatus.NOT_FOUND,
           );
@@ -81,7 +81,7 @@ export class GrowController {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all grows.`,
+            error: `Error when get all lights.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -91,13 +91,13 @@ export class GrowController {
       });
   }
 
-  @Put(':grow_id')
+  @Put(':light_id')
   async update(
-    @Param('grow_id', ParseIntPipe) grow_id: number,
+    @Param('light_id', ParseIntPipe) light_id: number,
     @Body() data: UpdateBody,
   ) {
     return await this.service
-      .update(grow_id, data)
+      .update(light_id, data)
       .then((res) => {
         return res;
       })
@@ -105,7 +105,7 @@ export class GrowController {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when updating grow with id ${grow_id}.`,
+            error: `Error when updating light with id ${light_id}.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -115,10 +115,10 @@ export class GrowController {
       });
   }
 
-  @Delete(':grow_id')
-  async delete(@Param('grow_id', ParseIntPipe) grow_id: number) {
+  @Delete(':light_id')
+  async delete(@Param('light_id', ParseIntPipe) light_id: number) {
     return await this.service
-      .delete(grow_id)
+      .delete(light_id)
       .then((res) => {
         return res;
       })
@@ -126,7 +126,7 @@ export class GrowController {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when delete grow with id ${grow_id}.`,
+            error: `Error when delete light with id ${light_id}.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {

@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { LightRepository } from '../repositories/LightRepository';
+import { Repository } from '../repositories/Repository';
 
 @Injectable()
 export class DeleteService {
-  constructor(private readonly light: LightRepository) {}
+  constructor(private readonly repository: Repository) {}
 
   async handle(light_id: number): Promise<any> {
-    return await this.light.delete(light_id);
+    return await this.repository.delete(light_id);
   }
 }

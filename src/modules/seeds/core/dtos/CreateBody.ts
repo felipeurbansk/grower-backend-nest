@@ -12,6 +12,9 @@ export class CreateBody {
   thc: number;
 
   @IsNumber()
+  cbd: number;
+
+  @IsNumber()
   vegetative_weeks: number;
 
   @IsNumber()

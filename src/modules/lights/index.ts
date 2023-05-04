@@ -1,20 +1,20 @@
 import { Module } from '@nestjs/common';
-import { LightController } from './application/controllers/LightController';
+import { Controllers } from './controllers/Controllers';
 import { Service } from './core/domain/Service';
 import { CreateService } from './core/domain/CreateService';
 import { DeleteService } from './core/domain/DeleteService';
 import { FilterService } from './core/domain/FilterService';
 import { GetByIdService } from './core/domain/GetByIdService';
 import { UpdateService } from './core/domain/UpdateService';
-import { LightRepository } from './core/repositories/LightRepository';
+import { Repository } from './core/repositories/Repository';
 import { PrismaRepository } from './core/repositories/prisma/PrismaRepository';
 import { PrismaService } from '../../infra/database/PrismaService';
 
 @Module({
-  controllers: [LightController],
+  controllers: [Controllers],
   providers: [
     {
-      provide: LightRepository,
+      provide: Repository,
       useClass: PrismaRepository,
     },
     CreateService,

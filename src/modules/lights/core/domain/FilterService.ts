@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { LightRepository } from '../repositories/LightRepository';
+import { Repository } from '../repositories/Repository';
 
 @Injectable()
 export class FilterService {
-  constructor(private readonly light: LightRepository) {}
+  constructor(private readonly repository: Repository) {}
 
   async handle(filter: any): Promise<any> {
-    return await this.light.getAll(filter);
+    return await this.repository.getAll(filter);
   }
 }
