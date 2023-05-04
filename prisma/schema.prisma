@@ -38,3 +38,11 @@ model Lights {
   lumens Int?
   status String?
 }
+
+model BaseComponents {
+  id Int @default(autoincrement()) @id
+  ip String
+  mac String
+  temperatures Temperatures[]
+  humidities Humidities[]
+}
