@@ -38,6 +38,19 @@ model Lights {
   lumens Int?
   status String?
 }
+model Temperatures {
+  id Int @default(autoincrement()) @id
+  base_component_id Int
+  value Int
+  base_component BaseComponents @relation(fields: [base_component_id], references: [id])
+}
+
+model Humidities {
+  id Int @default(autoincrement()) @id
+  base_component_id Int
+  value Int
+  base_component BaseComponents @relation(fields: [base_component_id], references: [id])
+}
 
 model BaseComponents {
   id Int @default(autoincrement()) @id
