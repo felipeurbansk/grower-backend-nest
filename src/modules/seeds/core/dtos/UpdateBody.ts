@@ -1,9 +1,24 @@
+import { IsNumber, IsString } from 'class-validator';
+
 export class UpdateBody {
+  @IsString()
   name: string;
 
-  width: number;
+  @IsString()
+  bank_name: string;
 
-  depth: number;
+  @IsNumber()
+  thc: number;
 
-  height: number;
+  @IsNumber()
+  cbd: number;
+
+  @IsNumber()
+  vegetative_weeks: number;
+
+  @IsNumber()
+  flowering_weeks: number;
+
+  @IsNumber()
+  per_square_meter: number;
 }
