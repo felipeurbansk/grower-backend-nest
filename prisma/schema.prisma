@@ -17,14 +17,13 @@ model Grows {
   width Int
   depth Int
   status String?
+  farming Farming[]
 }
 
 model Seeds {
   id Int @default(autoincrement()) @id
   name String
   bank_name String?
-  thc Int?
-  cbd Int?
   vegetative_weeks Int?
   flowering_weeks Int?
   per_square_meter Int?
@@ -59,3 +58,24 @@ model BaseComponents {
   temperatures Temperatures[]
   humidities Humidities[]
 }
+
+model Plants {
+  id Int @default(autoincrement()) @id
+  seed_id String
+  qrcode String?
+  init_germination DateTime?
+  init_vegetative DateTime?
+  init_flowering DateTime?
+  init_drying DateTime?
+  init_cure DateTime?
+  farming_id Int
+  farming Farming @relation(fields: [farming_id], references: [id])
+}
+
+model Farming {
+  id Int @default(autoincrement()) @id
+  plants Plants[]
+  grow Grows @relation(fields: [grow_id], references: [id])
+  grow_id Int
+}
+

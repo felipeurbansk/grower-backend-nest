@@ -9,12 +9,6 @@ export class CreateBody {
   bank_name: string;
 
   @IsNumber()
-  thc: number;
-
-  @IsNumber()
-  cbd: number;
-
-  @IsNumber()
   vegetative_weeks: number;
 
   @IsNumber()
