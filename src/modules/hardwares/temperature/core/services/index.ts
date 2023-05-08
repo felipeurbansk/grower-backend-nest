@@ -1,5 +1,5 @@
 import { Body, Injectable, Param, ParseIntPipe } from '@nestjs/common';
-import { CreateBody } from '../../core/dtos/CreateBody';
+import { CreateBody } from '../dtos/CreateBody';
 import { CreateService } from './CreateService';
 import { GetByIdService } from './GetByIdService';
 import { FilterService } from './FilterService';
