@@ -13,7 +13,7 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { Service } from '../core/domain/Service';
+import { Service } from '../core/services';
 
 @Controller('humidities')
 export class Controllers {
