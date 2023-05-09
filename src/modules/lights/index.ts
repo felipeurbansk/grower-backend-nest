@@ -1,28 +1,28 @@
 import { Module } from '@nestjs/common';
-import { Controllers } from './controllers/Controllers';
-import { Service } from './core/services';
-import { CreateService } from './core/services/CreateService';
-import { DeleteService } from './core/services/DeleteService';
-import { FilterService } from './core/services/FilterService';
-import { GetByIdService } from './core/services/GetByIdService';
-import { UpdateService } from './core/services/UpdateService';
-import { Repository } from './core/repositories/Repository';
-import { PrismaRepository } from './core/repositories/prisma/PrismaRepository';
+import { LightControllers } from './controllers/LightControllers';
+import { LightService } from './core/services';
+import { CreateLightService } from './core/services/CreateLightService';
+import { DeleteLightService } from './core/services/DeleteLightService';
+import { FilterLightService } from './core/services/FilterLightService';
+import { GetLightByIdService } from './core/services/GetLightByIdService';
+import { UpdateLightService } from './core/services/UpdateLightService';
+import { LightRepository } from './core/repositories/LightRepository';
+import { PrismaLightRepository } from './core/repositories/prisma/PrismaLightRepository';
 import { PrismaService } from '../../infra/database/PrismaService';
 
 @Module({
-  controllers: [Controllers],
+  controllers: [LightControllers],
   providers: [
     {
-      provide: Repository,
-      useClass: PrismaRepository,
+      provide: LightRepository,
+      useClass: PrismaLightRepository,
     },
-    CreateService,
-    DeleteService,
-    FilterService,
-    GetByIdService,
-    UpdateService,
-    Service,
+    CreateLightService,
+    DeleteLightService,
+    FilterLightService,
+    GetLightByIdService,
+    UpdateLightService,
+    LightService,
     PrismaService,
   ],
 })

@@ -79,3 +79,12 @@ model Farming {
   grow_id Int
 }
 
+model Users {
+  id Int @default(autoincrement()) @id
+  full_name String
+  username String @unique
+  email String @unique
+  password String
+  status String?
+}
+

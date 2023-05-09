@@ -1,28 +1,28 @@
 import { Module } from '@nestjs/common';
-import { Controllers } from './controllers/Controllers';
-import { Service } from './core/services';
-import { CreateService } from './core/services/CreateService';
-import { DeleteService } from './core/services/DeleteService';
-import { FilterService } from './core/services/FilterService';
-import { GetByIdService } from './core/services/GetByIdService';
-import { UpdateService } from './core/services/UpdateService';
-import { Repository } from './core/repositories/Repository';
-import { PrismaRepository } from './core/repositories/prisma/PrismaRepository';
+import { SeedControllers } from './controllers/SeedControllers';
+import { SeedService } from './core/services';
+import { CreateSeedService } from './core/services/CreateSeedService';
+import { DeleteSeedService } from './core/services/DeleteSeedService';
+import { FilterSeedService } from './core/services/FilterSeedService';
+import { GetSeedByIdService } from './core/services/GetSeedByIdService';
+import { UpdateSeedService } from './core/services/UpdateSeedService';
+import { SeedRepository } from './core/repositories/SeedRepository';
+import { PrismaSeedRepository } from './core/repositories/prisma/PrismaSeedRepository';
 import { PrismaService } from '../../infra/database/PrismaService';
 
 @Module({
-  controllers: [Controllers],
+  controllers: [SeedControllers],
   providers: [
     {
-      provide: Repository,
-      useClass: PrismaRepository,
+      provide: SeedRepository,
+      useClass: PrismaSeedRepository,
     },
-    CreateService,
-    DeleteService,
-    FilterService,
-    GetByIdService,
-    UpdateService,
-    Service,
+    CreateSeedService,
+    DeleteSeedService,
+    FilterSeedService,
+    GetSeedByIdService,
+    UpdateSeedService,
+    SeedService,
     PrismaService,
   ],
 })
