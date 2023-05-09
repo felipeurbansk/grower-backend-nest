@@ -6,14 +6,14 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { AuthService } from '../core/services';
-import { SignInBody } from '../core/dtos/SignInBody';
+import { AuthSignInBody } from '../core/dtos/AuthSignInBody';
 
 @Controller('auth')
-export class Controllers {
+export class AuthControllers {
   constructor(private readonly service: AuthService) {}
 
   @Post('signin')
-  async signIn(@Body() data: SignInBody) {
+  async signIn(@Body() data: AuthSignInBody) {
     return await this.service
       .signIn(data)
       .then((res) => {

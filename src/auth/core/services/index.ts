@@ -1,13 +1,13 @@
 import { Body, Injectable } from '@nestjs/common';
-import { SignInService } from './SignInService';
+import { AuthSignInService } from './AuthSignInService';
 
-import { SignInBody } from '../dtos/SignInBody';
+import { AuthSignInBody } from '../dtos/AuthSignInBody';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly signInService: SignInService) {}
+  constructor(private readonly signInService: AuthSignInService) {}
 
-  async signIn(@Body() data: SignInBody) {
+  async signIn(@Body() data: AuthSignInBody) {
     return await this.signInService.handle(data.email, data.password);
   }
 }
