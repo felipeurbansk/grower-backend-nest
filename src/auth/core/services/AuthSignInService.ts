@@ -2,7 +2,7 @@ import { UserServices } from '../../../modules/users/core/services';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 
 @Injectable()
-export class SignInService {
+export class AuthSignInService {
   constructor(private userService: UserServices) {}
 
   async handle(email: string, password: string): Promise<any> {
