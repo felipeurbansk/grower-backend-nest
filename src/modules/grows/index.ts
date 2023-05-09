@@ -6,16 +6,16 @@ import { DeleteService } from './core/services/DeleteGrowService';
 import { FilterService } from './core/services/FilterGrowService';
 import { GetByIdService } from './core/services/GetGrowByIdService';
 import { UpdateService } from './core/services/UpdateGrowService';
-import { Repository } from './core/repositories/GrowRepository';
-import { PrismaRepository } from './core/repositories/prisma/PrismaGrowRepository';
+import { GrowRepository } from './core/repositories/GrowRepository';
+import { PrismaGrowRepository } from './core/repositories/prisma/PrismaGrowRepository';
 import { PrismaService } from '../../infra/database/PrismaService';
 
 @Module({
   controllers: [GrowControllers],
   providers: [
     {
-      provide: Repository,
-      useClass: PrismaRepository,
+      provide: GrowRepository,
+      useClass: PrismaGrowRepository,
     },
     CreateService,
     DeleteService,
