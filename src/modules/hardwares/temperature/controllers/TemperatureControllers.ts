@@ -13,11 +13,11 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { Service } from '../core/services';
+import { TemperatureService } from '../core/services';
 
 @Controller('temperatures')
 export class TemperatureControllers {
-  constructor(private readonly service: Service) {}
+  constructor(private readonly service: TemperatureService) {}
 
   @Post()
   async create(@Body() data: CreateTemperatureBody) {
