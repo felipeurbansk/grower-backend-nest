@@ -13,11 +13,11 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { Service } from '../core/services';
+import { HumidityService } from '../core/services';
 
 @Controller('humidities')
 export class HumidityControllers {
-  constructor(private readonly service: Service) {}
+  constructor(private readonly service: HumidityService) {}
 
   @Post()
   async create(@Body() data: CreateHumidityBody) {
