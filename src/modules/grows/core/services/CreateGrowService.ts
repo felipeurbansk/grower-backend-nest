@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { GrowRepository } from '../repositories/GrowRepository';
 
 @Injectable()
-export class CreateService {
+export class CreateGrowService {
   constructor(private readonly repository: GrowRepository) {}
 
   async handle(data: any): Promise<any> {

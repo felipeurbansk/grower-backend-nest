@@ -1,28 +1,29 @@
 import { Module } from '@nestjs/common';
-import { Controllers } from './controllers/Controllers';
-import { Service } from './core/services';
-import { CreateService } from './core/services/CreateService';
-import { DeleteService } from './core/services/DeleteService';
-import { FilterService } from './core/services/FilterService';
-import { GetByIdService } from './core/services/GetByIdService';
-import { UpdateService } from './core/services/UpdateService';
-import { Repository } from './core/repositories/Repository';
-import { PrismaRepository } from './core/repositories/prisma/PrismaRepository';
+import { TemperatureControllers } from './controllers/TemperatureControllers';
+import { TemperatureService } from './core/services';
+import { CreateTemperatureService } from './core/services/CreateTemperatureService';
+import { DeleteTemperatureService } from './core/services/DeleteTemperatureService';
+import { FilterTemperatureService } from './core/services/FilterTemperatureService';
+import { GetTemperatureByIdService } from './core/services/GetTemperatureByIdService';
+import { UpdateTemperatureService } from './core/services/UpdateTemperatureService';
+import { TemperatureRepository } from './core/repositories/TemperatureRepository';
+import { PrismaTemperatureRepository } from './core/repositories/prisma/PrismaTemperatureRepository';
 import { PrismaService } from '../../../infra/database/PrismaService';
 
 @Module({
-  controllers: [Controllers],
+  exports: [TemperatureService],
+  controllers: [TemperatureControllers],
   providers: [
     {
-      provide: Repository,
-      useClass: PrismaRepository,
+      provide: TemperatureRepository,
+      useClass: PrismaTemperatureRepository,
     },
-    CreateService,
-    DeleteService,
-    FilterService,
-    GetByIdService,
-    UpdateService,
-    Service,
+    CreateTemperatureService,
+    DeleteTemperatureService,
+    FilterTemperatureService,
+    GetTemperatureByIdService,
+    UpdateTemperatureService,
+    TemperatureService,
     PrismaService,
   ],
 })

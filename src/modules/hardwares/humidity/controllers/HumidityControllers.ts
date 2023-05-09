@@ -1,6 +1,6 @@
-import { CreateGrowBody } from '../core/dtos/CreateGrowBody';
-import { UpdateGrowBody } from '../core/dtos/UpdateGrowBody';
-import { FilterGrowBody } from '../core/dtos/FilterGrowBody';
+import { CreateHumidityBody } from '../core/dtos/CreateHumidityBody';
+import { UpdateHumidityBody } from '../core/dtos/UpdateHumidityBody';
+import { FilterHumidityBody } from '../core/dtos/FilterHumidityBody';
 import {
   Body,
   Controller,
@@ -13,14 +13,14 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { GrowService } from '../core/services';
+import { Service } from '../core/services';
 
-@Controller('grows')
-export class GrowControllers {
-  constructor(private readonly service: GrowService) {}
+@Controller('humidities')
+export class HumidityControllers {
+  constructor(private readonly service: Service) {}
 
   @Post()
-  async create(@Body() data: CreateGrowBody) {
+  async create(@Body() data: CreateHumidityBody) {
     return await this.service
       .create(data)
       .then((res) => {
@@ -30,7 +30,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when create new grows.`,
+            error: `Error when create new humidities.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -41,7 +41,7 @@ export class GrowControllers {
   }
 
   @Get()
-  async get(@Body() filter: FilterGrowBody) {
+  async get(@Body() filter: FilterHumidityBody) {
     return await this.service
       .get(filter)
       .then((res) => {
@@ -51,7 +51,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all grows.`,
+            error: `Error when get all humidities.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -61,16 +61,16 @@ export class GrowControllers {
       });
   }
 
-  @Get(':grow_id')
-  async getById(@Param('grow_id', ParseIntPipe) grow_id: number) {
+  @Get(':humidty_id')
+  async getById(@Param('humidty_id', ParseIntPipe) humidty_id: number) {
     return await this.service
-      .getById(grow_id)
+      .getById(humidty_id)
       .then((res) => {
         if (!res)
           throw new HttpException(
             {
               status: HttpStatus.NOT_FOUND,
-              error: `Grow with id ${grow_id} not found.`,
+              error: `Humidty with id ${humidty_id} not found.`,
             },
             HttpStatus.NOT_FOUND,
           );
@@ -81,7 +81,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all grows.`,
+            error: `Error when get all humidities.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -91,13 +91,13 @@ export class GrowControllers {
       });
   }
 
-  @Put(':grow_id')
+  @Put(':humidty_id')
   async update(
-    @Param('grow_id', ParseIntPipe) grow_id: number,
-    @Body() data: UpdateGrowBody,
+    @Param('humidty_id', ParseIntPipe) humidty_id: number,
+    @Body() data: UpdateHumidityBody,
   ) {
     return await this.service
-      .update(grow_id, data)
+      .update(humidty_id, data)
       .then((res) => {
         return res;
       })
@@ -105,7 +105,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when updating grow with id ${grow_id}.`,
+            error: `Error when updating humidty with id ${humidty_id}.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -115,10 +115,10 @@ export class GrowControllers {
       });
   }
 
-  @Delete(':grow_id')
-  async delete(@Param('grow_id', ParseIntPipe) grow_id: number) {
+  @Delete(':humidty_id')
+  async delete(@Param('humidty_id', ParseIntPipe) humidty_id: number) {
     return await this.service
-      .delete(grow_id)
+      .delete(humidty_id)
       .then((res) => {
         return res;
       })
@@ -126,7 +126,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when delete grow with id ${grow_id}.`,
+            error: `Error when delete humidty with id ${humidty_id}.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {

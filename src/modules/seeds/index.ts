@@ -11,6 +11,7 @@ import { PrismaSeedRepository } from './core/repositories/prisma/PrismaSeedRepos
 import { PrismaService } from '../../infra/database/PrismaService';
 
 @Module({
+  exports: [SeedService],
   controllers: [SeedControllers],
   providers: [
     {

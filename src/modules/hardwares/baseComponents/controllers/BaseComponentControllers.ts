@@ -1,6 +1,6 @@
-import { CreateGrowBody } from '../core/dtos/CreateGrowBody';
-import { UpdateGrowBody } from '../core/dtos/UpdateGrowBody';
-import { FilterGrowBody } from '../core/dtos/FilterGrowBody';
+import { CreateBaseComponentBody } from '../core/dtos/CreateBaseComponentBody';
+import { UpdateBaseComponentBody } from '../core/dtos/UpdateBaseComponentBody';
+import { FilterBaseComponentBody } from '../core/dtos/FilterBaseComponentBody';
 import {
   Body,
   Controller,
@@ -13,14 +13,14 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { GrowService } from '../core/services';
+import { Service } from '../core/services';
 
-@Controller('grows')
-export class GrowControllers {
-  constructor(private readonly service: GrowService) {}
+@Controller('baseComponents')
+export class BaseComponentControllers {
+  constructor(private readonly service: Service) {}
 
   @Post()
-  async create(@Body() data: CreateGrowBody) {
+  async create(@Body() data: CreateBaseComponentBody) {
     return await this.service
       .create(data)
       .then((res) => {
@@ -30,7 +30,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when create new grows.`,
+            error: `Error when create new baseComponents.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -41,7 +41,7 @@ export class GrowControllers {
   }
 
   @Get()
-  async get(@Body() filter: FilterGrowBody) {
+  async get(@Body() filter: FilterBaseComponentBody) {
     return await this.service
       .get(filter)
       .then((res) => {
@@ -51,7 +51,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all grows.`,
+            error: `Error when get all baseComponents.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -61,16 +61,18 @@ export class GrowControllers {
       });
   }
 
-  @Get(':grow_id')
-  async getById(@Param('grow_id', ParseIntPipe) grow_id: number) {
+  @Get(':baseComponent_id')
+  async getById(
+    @Param('baseComponent_id', ParseIntPipe) baseComponent_id: number,
+  ) {
     return await this.service
-      .getById(grow_id)
+      .getById(baseComponent_id)
       .then((res) => {
         if (!res)
           throw new HttpException(
             {
               status: HttpStatus.NOT_FOUND,
-              error: `Grow with id ${grow_id} not found.`,
+              error: `BaseComponent with id ${baseComponent_id} not found.`,
             },
             HttpStatus.NOT_FOUND,
           );
@@ -81,7 +83,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all grows.`,
+            error: `Error when get all baseComponents.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -91,13 +93,13 @@ export class GrowControllers {
       });
   }
 
-  @Put(':grow_id')
+  @Put(':baseComponent_id')
   async update(
-    @Param('grow_id', ParseIntPipe) grow_id: number,
-    @Body() data: UpdateGrowBody,
+    @Param('baseComponent_id', ParseIntPipe) baseComponent_id: number,
+    @Body() data: UpdateBaseComponentBody,
   ) {
     return await this.service
-      .update(grow_id, data)
+      .update(baseComponent_id, data)
       .then((res) => {
         return res;
       })
@@ -105,7 +107,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when updating grow with id ${grow_id}.`,
+            error: `Error when updating baseComponent with id ${baseComponent_id}.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -115,10 +117,12 @@ export class GrowControllers {
       });
   }
 
-  @Delete(':grow_id')
-  async delete(@Param('grow_id', ParseIntPipe) grow_id: number) {
+  @Delete(':baseComponent_id')
+  async delete(
+    @Param('baseComponent_id', ParseIntPipe) baseComponent_id: number,
+  ) {
     return await this.service
-      .delete(grow_id)
+      .delete(baseComponent_id)
       .then((res) => {
         return res;
       })
@@ -126,7 +130,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when delete grow with id ${grow_id}.`,
+            error: `Error when delete baseComponent with id ${baseComponent_id}.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {

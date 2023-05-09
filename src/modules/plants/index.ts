@@ -11,6 +11,7 @@ import { PrismaPlantRepository } from './core/repositories/prisma/PrismaPlantRep
 import { PrismaService } from '../../infra/database/PrismaService';
 
 @Module({
+  exports: [PlantService],
   controllers: [PlantControllers],
   providers: [
     {

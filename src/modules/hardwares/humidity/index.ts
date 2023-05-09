@@ -1,28 +1,29 @@
 import { Module } from '@nestjs/common';
-import { Controllers } from './controllers/Controllers';
-import { Service } from './core/services';
-import { CreateService } from './core/services/CreateService';
-import { DeleteService } from './core/services/DeleteService';
-import { FilterService } from './core/services/FilterService';
-import { GetByIdService } from './core/services/GetByIdService';
-import { UpdateService } from './core/services/UpdateService';
-import { Repository } from './core/repositories/Repository';
-import { PrismaRepository } from './core/repositories/prisma/PrismaRepository';
+import { HumidityControllers } from './controllers/HumidityControllers';
+import { HumidityService } from './core/services';
+import { CreateHumidityService } from './core/services/CreateHumidityService';
+import { DeleteHumidityService } from './core/services/DeleteHumidityService';
+import { FilterHumidityService } from './core/services/FilterHumidityService';
+import { GetHumidityByIdService } from './core/services/GetHumidityByIdService';
+import { UpdateHumidityService } from './core/services/UpdateHumidityService';
+import { HumidityRepository } from './core/repositories/HumidityRepository';
+import { PrismaHumidityRepository } from './core/repositories/prisma/PrismaHumidityRepository';
 import { PrismaService } from '../../../infra/database/PrismaService';
 
 @Module({
-  controllers: [Controllers],
+  exports: [HumidityService],
+  controllers: [HumidityControllers],
   providers: [
     {
-      provide: Repository,
-      useClass: PrismaRepository,
+      provide: HumidityRepository,
+      useClass: PrismaHumidityRepository,
     },
-    CreateService,
-    DeleteService,
-    FilterService,
-    GetByIdService,
-    UpdateService,
-    Service,
+    CreateHumidityService,
+    DeleteHumidityService,
+    FilterHumidityService,
+    GetHumidityByIdService,
+    UpdateHumidityService,
+    HumidityService,
     PrismaService,
   ],
 })

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { GrowRepository } from '../repositories/GrowRepository';
 
 @Injectable()
-export class DeleteService {
+export class DeleteGrowService {
   constructor(private readonly repository: GrowRepository) {}
 
   async handle(grow_id: number): Promise<any> {

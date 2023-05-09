@@ -1,29 +1,29 @@
 import { Body, Injectable, Param, ParseIntPipe } from '@nestjs/common';
-import { CreateBody } from '../dtos/CreateBody';
-import { CreateService } from './CreateService';
-import { GetByIdService } from './GetByIdService';
-import { FilterService } from './FilterService';
-import { UpdateService } from './UpdateService';
+import { CreateHumidityBody } from '../dtos/CreateHumidityBody';
+import { CreateHumidityService } from './CreateHumidityService';
+import { GetHumidityByIdService } from './GetHumidityByIdService';
+import { FilterHumidityService } from './FilterHumidityService';
+import { UpdateHumidityService } from './UpdateHumidityService';
 
-import { FilterBody } from '../dtos/FilterBody';
-import { UpdateBody } from '../dtos/UpdateBody';
-import { DeleteService } from './DeleteService';
+import { FilterHumidityBody } from '../dtos/FilterHumidityBody';
+import { UpdateHumidityBody } from '../dtos/UpdateHumidityBody';
+import { DeleteHumidityService } from './DeleteHumidityService';
 
 @Injectable()
-export class Service {
+export class HumidityService {
   constructor(
-    private readonly createService: CreateService,
-    private readonly filterService: FilterService,
-    private readonly getByIdService: GetByIdService,
-    private readonly updateService: UpdateService,
-    private readonly deleteService: DeleteService,
+    private readonly createService: CreateHumidityService,
+    private readonly filterService: FilterHumidityService,
+    private readonly getByIdService: GetHumidityByIdService,
+    private readonly updateService: UpdateHumidityService,
+    private readonly deleteService: DeleteHumidityService,
   ) {}
 
-  async create(@Body() data: CreateBody) {
+  async create(@Body() data: CreateHumidityBody) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterBody) {
+  async get(@Body() filter: FilterHumidityBody) {
     return await this.filterService.handle(filter);
   }
 
@@ -33,7 +33,7 @@ export class Service {
 
   async update(
     @Param('humidty_id', ParseIntPipe) humidty_id: number,
-    @Body() data: UpdateBody,
+    @Body() data: UpdateHumidityBody,
   ) {
     return await this.updateService.handle(humidty_id, data);
   }

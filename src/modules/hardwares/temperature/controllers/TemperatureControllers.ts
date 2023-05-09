@@ -1,6 +1,6 @@
-import { CreateGrowBody } from '../core/dtos/CreateGrowBody';
-import { UpdateGrowBody } from '../core/dtos/UpdateGrowBody';
-import { FilterGrowBody } from '../core/dtos/FilterGrowBody';
+import { CreateTemperatureBody } from '../core/dtos/CreateTemperatureBody';
+import { UpdateTemperatureBody } from '../core/dtos/UpdateTemperatureBody';
+import { FilterTemperatureBody } from '../core/dtos/FilterTemperatureBody';
 import {
   Body,
   Controller,
@@ -13,14 +13,14 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { GrowService } from '../core/services';
+import { Service } from '../core/services';
 
-@Controller('grows')
-export class GrowControllers {
-  constructor(private readonly service: GrowService) {}
+@Controller('temperatures')
+export class TemperatureControllers {
+  constructor(private readonly service: Service) {}
 
   @Post()
-  async create(@Body() data: CreateGrowBody) {
+  async create(@Body() data: CreateTemperatureBody) {
     return await this.service
       .create(data)
       .then((res) => {
@@ -30,7 +30,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when create new grows.`,
+            error: `Error when create new temperatures.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -41,7 +41,7 @@ export class GrowControllers {
   }
 
   @Get()
-  async get(@Body() filter: FilterGrowBody) {
+  async get(@Body() filter: FilterTemperatureBody) {
     return await this.service
       .get(filter)
       .then((res) => {
@@ -51,7 +51,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all grows.`,
+            error: `Error when get all temperatures.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -61,16 +61,16 @@ export class GrowControllers {
       });
   }
 
-  @Get(':grow_id')
-  async getById(@Param('grow_id', ParseIntPipe) grow_id: number) {
+  @Get(':temperature_id')
+  async getById(@Param('temperature_id', ParseIntPipe) temperature_id: number) {
     return await this.service
-      .getById(grow_id)
+      .getById(temperature_id)
       .then((res) => {
         if (!res)
           throw new HttpException(
             {
               status: HttpStatus.NOT_FOUND,
-              error: `Grow with id ${grow_id} not found.`,
+              error: `Temperature with id ${temperature_id} not found.`,
             },
             HttpStatus.NOT_FOUND,
           );
@@ -81,7 +81,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all grows.`,
+            error: `Error when get all temperatures.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -91,13 +91,13 @@ export class GrowControllers {
       });
   }
 
-  @Put(':grow_id')
+  @Put(':temperature_id')
   async update(
-    @Param('grow_id', ParseIntPipe) grow_id: number,
-    @Body() data: UpdateGrowBody,
+    @Param('temperature_id', ParseIntPipe) temperature_id: number,
+    @Body() data: UpdateTemperatureBody,
   ) {
     return await this.service
-      .update(grow_id, data)
+      .update(temperature_id, data)
       .then((res) => {
         return res;
       })
@@ -105,7 +105,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when updating grow with id ${grow_id}.`,
+            error: `Error when updating temperature with id ${temperature_id}.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -115,10 +115,10 @@ export class GrowControllers {
       });
   }
 
-  @Delete(':grow_id')
-  async delete(@Param('grow_id', ParseIntPipe) grow_id: number) {
+  @Delete(':temperature_id')
+  async delete(@Param('temperature_id', ParseIntPipe) temperature_id: number) {
     return await this.service
-      .delete(grow_id)
+      .delete(temperature_id)
       .then((res) => {
         return res;
       })
@@ -126,7 +126,7 @@ export class GrowControllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when delete grow with id ${grow_id}.`,
+            error: `Error when delete temperature with id ${temperature_id}.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
