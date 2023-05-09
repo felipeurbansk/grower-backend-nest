@@ -1,28 +1,29 @@
 import { Module } from '@nestjs/common';
-import { Controllers } from './controllers/Controllers';
-import { Service } from './core/services';
-import { CreateService } from './core/services/CreateService';
-import { DeleteService } from './core/services/DeleteService';
-import { FilterService } from './core/services/FilterService';
-import { GetByIdService } from './core/services/GetByIdService';
-import { UpdateService } from './core/services/UpdateService';
-import { Repository } from './core/repositories/Repository';
-import { PrismaRepository } from './core/repositories/prisma/PrismaRepository';
+import { GrowControllers } from './controllers/GrowControllers';
+import { GrowService } from './core/services';
+import { CreateGrowService } from './core/services/CreateGrowService';
+import { DeleteGrowService } from './core/services/DeleteGrowService';
+import { FilterGrowService } from './core/services/FilterGrowService';
+import { GetGrowByIdService } from './core/services/GetGrowByIdService';
+import { UpdateGrowService } from './core/services/UpdateGrowService';
+import { GrowRepository } from './core/repositories/GrowRepository';
+import { PrismaGrowRepository } from './core/repositories/prisma/PrismaGrowRepository';
 import { PrismaService } from '../../infra/database/PrismaService';
 
 @Module({
-  controllers: [Controllers],
+  exports: [GrowService],
+  controllers: [GrowControllers],
   providers: [
     {
-      provide: Repository,
-      useClass: PrismaRepository,
+      provide: GrowRepository,
+      useClass: PrismaGrowRepository,
     },
-    CreateService,
-    DeleteService,
-    FilterService,
-    GetByIdService,
-    UpdateService,
-    Service,
+    CreateGrowService,
+    DeleteGrowService,
+    FilterGrowService,
+    GetGrowByIdService,
+    UpdateGrowService,
+    GrowService,
     PrismaService,
   ],
 })

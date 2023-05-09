@@ -1,29 +1,29 @@
 import { Body, Injectable, Param, ParseIntPipe } from '@nestjs/common';
-import { CreateBody } from '../dtos/CreateBody';
-import { CreateService } from './CreateService';
-import { GetByIdService } from './GetByIdService';
-import { FilterService } from './FilterService';
-import { UpdateService } from './UpdateService';
+import { CreateBaseComponentService } from './CreateBaseComponentService';
+import { GetBaseComponentByIdService } from './GetBaseComponentByIdService';
+import { FilterBaseComponentService } from './FilterBaseComponentService';
+import { UpdateBaseComponentService } from './UpdateBaseComponentService';
 
-import { FilterBody } from '../dtos/FilterBody';
-import { UpdateBody } from '../dtos/UpdateBody';
-import { DeleteService } from './DeleteService';
+import { CreateBaseComponentBody } from '../dtos/CreateBaseComponentBody';
+import { FilterBaseComponentBody } from '../dtos/FilterBaseComponentBody';
+import { UpdateBaseComponentBody } from '../dtos/UpdateBaseComponentBody';
+import { DeleteBaseComponentService } from './DeleteBaseComponentService';
 
 @Injectable()
-export class Service {
+export class BaseComponentService {
   constructor(
-    private readonly createService: CreateService,
-    private readonly filterService: FilterService,
-    private readonly getByIdService: GetByIdService,
-    private readonly updateService: UpdateService,
-    private readonly deleteService: DeleteService,
+    private readonly createService: CreateBaseComponentService,
+    private readonly filterService: FilterBaseComponentService,
+    private readonly getByIdService: GetBaseComponentByIdService,
+    private readonly updateService: UpdateBaseComponentService,
+    private readonly deleteService: DeleteBaseComponentService,
   ) {}
 
-  async create(@Body() data: CreateBody) {
+  async create(@Body() data: CreateBaseComponentBody) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterBody) {
+  async get(@Body() filter: FilterBaseComponentBody) {
     return await this.filterService.handle(filter);
   }
 
@@ -35,7 +35,7 @@ export class Service {
 
   async update(
     @Param('base_component_id', ParseIntPipe) base_component_id: number,
-    @Body() data: UpdateBody,
+    @Body() data: UpdateBaseComponentBody,
   ) {
     return await this.updateService.handle(base_component_id, data);
   }

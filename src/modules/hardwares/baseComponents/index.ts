@@ -1,28 +1,29 @@
 import { Module } from '@nestjs/common';
-import { Controllers } from './controllers/Controllers';
-import { Service } from './core/services';
-import { CreateService } from './core/services/CreateService';
-import { DeleteService } from './core/services/DeleteService';
-import { FilterService } from './core/services/FilterService';
-import { GetByIdService } from './core/services/GetByIdService';
-import { UpdateService } from './core/services/UpdateService';
-import { Repository } from './core/repositories/Repository';
-import { PrismaRepository } from './core/repositories/prisma/PrismaRepository';
+import { BaseComponentControllers } from './controllers/BaseComponentControllers';
+import { BaseComponentService } from './core/services';
+import { CreateBaseComponentService } from './core/services/CreateBaseComponentService';
+import { DeleteBaseComponentService } from './core/services/DeleteBaseComponentService';
+import { FilterBaseComponentService } from './core/services/FilterBaseComponentService';
+import { GetBaseComponentByIdService } from './core/services/GetBaseComponentByIdService';
+import { UpdateBaseComponentService } from './core/services/UpdateBaseComponentService';
+import { BaseComponentRepository } from './core/repositories/BaseComponentRepository';
+import { PrismaBaseComponentRepository } from './core/repositories/prisma/PrismaBaseComponentRepository';
 import { PrismaService } from '../../../infra/database/PrismaService';
 
 @Module({
-  controllers: [Controllers],
+  exports: [BaseComponentService],
+  controllers: [BaseComponentControllers],
   providers: [
     {
-      provide: Repository,
-      useClass: PrismaRepository,
+      provide: BaseComponentRepository,
+      useClass: PrismaBaseComponentRepository,
     },
-    CreateService,
-    DeleteService,
-    FilterService,
-    GetByIdService,
-    UpdateService,
-    Service,
+    CreateBaseComponentService,
+    DeleteBaseComponentService,
+    FilterBaseComponentService,
+    GetBaseComponentByIdService,
+    UpdateBaseComponentService,
+    BaseComponentService,
     PrismaService,
   ],
 })

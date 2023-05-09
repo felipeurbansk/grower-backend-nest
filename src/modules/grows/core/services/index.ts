@@ -1,29 +1,29 @@
 import { Body, Injectable, Param, ParseIntPipe } from '@nestjs/common';
-import { CreateBody } from '../dtos/CreateBody';
-import { CreateService } from './CreateService';
-import { GetByIdService } from './GetByIdService';
-import { FilterService } from './FilterService';
-import { UpdateService } from './UpdateService';
+import { CreateGrowBody } from '../dtos/CreateGrowBody';
+import { CreateGrowService } from './CreateGrowService';
+import { GetGrowByIdService } from './GetGrowByIdService';
+import { FilterGrowService } from './FilterGrowService';
+import { UpdateGrowService } from './UpdateGrowService';
 
-import { FilterBody } from '../dtos/FilterBody';
-import { UpdateBody } from '../dtos/UpdateBody';
-import { DeleteService } from './DeleteService';
+import { FilterGrowBody } from '../dtos/FilterGrowBody';
+import { UpdateGrowBody } from '../dtos/UpdateGrowBody';
+import { DeleteGrowService } from './DeleteGrowService';
 
 @Injectable()
-export class Service {
+export class GrowService {
   constructor(
-    private readonly createService: CreateService,
-    private readonly filterService: FilterService,
-    private readonly getByIdService: GetByIdService,
-    private readonly updateService: UpdateService,
-    private readonly deleteService: DeleteService,
+    private readonly createService: CreateGrowService,
+    private readonly filterService: FilterGrowService,
+    private readonly getByIdService: GetGrowByIdService,
+    private readonly updateService: UpdateGrowService,
+    private readonly deleteService: DeleteGrowService,
   ) {}
 
-  async create(@Body() data: CreateBody) {
+  async create(@Body() data: CreateGrowBody) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterBody) {
+  async get(@Body() filter: FilterGrowBody) {
     return await this.filterService.handle(filter);
   }
 
@@ -33,7 +33,7 @@ export class Service {
 
   async update(
     @Param('grow_id', ParseIntPipe) grow_id: number,
-    @Body() data: UpdateBody,
+    @Body() data: UpdateGrowBody,
   ) {
     return await this.updateService.handle(grow_id, data);
   }

@@ -1,29 +1,29 @@
 import { Body, Injectable, Param, ParseIntPipe } from '@nestjs/common';
-import { CreateBody } from '../dtos/CreateBody';
-import { CreateService } from './CreateService';
-import { GetByIdService } from './GetByIdService';
-import { FilterService } from './FilterService';
-import { UpdateService } from './UpdateService';
+import { CreateTemperatureBody } from '../dtos/CreateTemperatureBody';
+import { CreateTemperatureService } from './CreateTemperatureService';
+import { GetTemperatureByIdService } from './GetTemperatureByIdService';
+import { FilterTemperatureService } from './FilterTemperatureService';
+import { UpdateTemperatureService } from './UpdateTemperatureService';
 
-import { FilterBody } from '../dtos/FilterBody';
-import { UpdateBody } from '../dtos/UpdateBody';
-import { DeleteService } from './DeleteService';
+import { FilterTemperatureBody } from '../dtos/FilterTemperatureBody';
+import { UpdateTemperatureBody } from '../dtos/UpdateTemperatureBody';
+import { DeleteTemperatureService } from './DeleteTemperatureService';
 
 @Injectable()
-export class Service {
+export class TemperatureService {
   constructor(
-    private readonly createService: CreateService,
-    private readonly filterService: FilterService,
-    private readonly getByIdService: GetByIdService,
-    private readonly updateService: UpdateService,
-    private readonly deleteService: DeleteService,
+    private readonly createService: CreateTemperatureService,
+    private readonly filterService: FilterTemperatureService,
+    private readonly getByIdService: GetTemperatureByIdService,
+    private readonly updateService: UpdateTemperatureService,
+    private readonly deleteService: DeleteTemperatureService,
   ) {}
 
-  async create(@Body() data: CreateBody) {
+  async create(@Body() data: CreateTemperatureBody) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterBody) {
+  async get(@Body() filter: FilterTemperatureBody) {
     return await this.filterService.handle(filter);
   }
 
@@ -33,7 +33,7 @@ export class Service {
 
   async update(
     @Param('temperature_id', ParseIntPipe) temperature_id: number,
-    @Body() data: UpdateBody,
+    @Body() data: UpdateTemperatureBody,
   ) {
     return await this.updateService.handle(temperature_id, data);
   }

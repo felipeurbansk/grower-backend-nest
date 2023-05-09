@@ -11,6 +11,7 @@ import { PrismaLightRepository } from './core/repositories/prisma/PrismaLightRep
 import { PrismaService } from '../../infra/database/PrismaService';
 
 @Module({
+  exports: [LightService],
   controllers: [LightControllers],
   providers: [
     {
