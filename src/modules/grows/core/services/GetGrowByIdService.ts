@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from '../repositories/Repository';
+import { GrowRepository } from '../repositories/GrowRepository';
 
 @Injectable()
 export class GetByIdService {
-  constructor(private readonly repository: Repository) {}
+  constructor(private readonly repository: GrowRepository) {}
 
   async handle(grow_id: number): Promise<any> {
     return await this.repository.getById(grow_id);

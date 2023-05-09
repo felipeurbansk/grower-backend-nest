@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common';
-import { Controllers } from './controllers/Controllers';
+import { GrowControllers } from './controllers/GrowControllers';
 import { Service } from './core/services';
-import { CreateService } from './core/services/CreateService';
-import { DeleteService } from './core/services/DeleteService';
-import { FilterService } from './core/services/FilterService';
-import { GetByIdService } from './core/services/GetByIdService';
-import { UpdateService } from './core/services/UpdateService';
-import { Repository } from './core/repositories/Repository';
-import { PrismaRepository } from './core/repositories/prisma/PrismaRepository';
+import { CreateService } from './core/services/CreateGrowService';
+import { DeleteService } from './core/services/DeleteGrowService';
+import { FilterService } from './core/services/FilterGrowService';
+import { GetByIdService } from './core/services/GetGrowByIdService';
+import { UpdateService } from './core/services/UpdateGrowService';
+import { Repository } from './core/repositories/GrowRepository';
+import { PrismaRepository } from './core/repositories/prisma/PrismaGrowRepository';
 import { PrismaService } from '../../infra/database/PrismaService';
 
 @Module({
-  controllers: [Controllers],
+  controllers: [GrowControllers],
   providers: [
     {
       provide: Repository,

@@ -1,13 +1,13 @@
 import { Body, Injectable, Param, ParseIntPipe } from '@nestjs/common';
-import { CreateBody } from '../dtos/CreateBody';
-import { CreateService } from './CreateService';
-import { GetByIdService } from './GetByIdService';
-import { FilterService } from './FilterService';
-import { UpdateService } from './UpdateService';
+import { CreateBody } from '../dtos/CreateGrowBody';
+import { CreateService } from './CreateGrowService';
+import { GetByIdService } from './GetGrowByIdService';
+import { FilterService } from './FilterGrowService';
+import { UpdateService } from './UpdateGrowService';
 
-import { FilterBody } from '../dtos/FilterBody';
-import { UpdateBody } from '../dtos/UpdateBody';
-import { DeleteService } from './DeleteService';
+import { FilterBody } from '../dtos/FilterGrowBody';
+import { UpdateBody } from '../dtos/UpdateGrowBody';
+import { DeleteService } from './DeleteGrowService';
 
 @Injectable()
 export class Service {
