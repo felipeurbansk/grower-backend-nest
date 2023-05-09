@@ -1,6 +1,6 @@
-import { CreateBody } from '../core/dtos/CreateBody';
-import { UpdateBody } from '../core/dtos/UpdateBody';
-import { FilterBody } from '../core/dtos/FilterBody';
+import { CreateLightBody } from '../core/dtos/CreateLightBody';
+import { UpdateLightBody } from '../core/dtos/UpdateLightBody';
+import { FilterLightBody } from '../core/dtos/FilterLightBody';
 import {
   Body,
   Controller,
@@ -13,14 +13,14 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { Service } from '../core/services';
+import { LightService } from '../core/services';
 
-@Controller('seeds')
-export class Controllers {
-  constructor(private readonly service: Service) {}
+@Controller('lights')
+export class LightControllers {
+  constructor(private readonly service: LightService) {}
 
   @Post()
-  async create(@Body() data: CreateBody) {
+  async create(@Body() data: CreateLightBody) {
     return await this.service
       .create(data)
       .then((res) => {
@@ -30,7 +30,7 @@ export class Controllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when create new seeds.`,
+            error: `Error when create new lights.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -41,7 +41,7 @@ export class Controllers {
   }
 
   @Get()
-  async get(@Body() filter: FilterBody) {
+  async get(@Body() filter: FilterLightBody) {
     return await this.service
       .get(filter)
       .then((res) => {
@@ -51,7 +51,7 @@ export class Controllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all seeds.`,
+            error: `Error when get all lights.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -61,16 +61,16 @@ export class Controllers {
       });
   }
 
-  @Get(':seed_id')
-  async getById(@Param('seed_id', ParseIntPipe) seed_id: number) {
+  @Get(':light_id')
+  async getById(@Param('light_id', ParseIntPipe) light_id: number) {
     return await this.service
-      .getById(seed_id)
+      .getById(light_id)
       .then((res) => {
         if (!res)
           throw new HttpException(
             {
               status: HttpStatus.NOT_FOUND,
-              error: `seed with id ${seed_id} not found.`,
+              error: `light with id ${light_id} not found.`,
             },
             HttpStatus.NOT_FOUND,
           );
@@ -81,7 +81,7 @@ export class Controllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all seeds.`,
+            error: `Error when get all lights.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -91,13 +91,13 @@ export class Controllers {
       });
   }
 
-  @Put(':seed_id')
+  @Put(':light_id')
   async update(
-    @Param('seed_id', ParseIntPipe) seed_id: number,
-    @Body() data: UpdateBody,
+    @Param('light_id', ParseIntPipe) light_id: number,
+    @Body() data: UpdateLightBody,
   ) {
     return await this.service
-      .update(seed_id, data)
+      .update(light_id, data)
       .then((res) => {
         return res;
       })
@@ -105,7 +105,7 @@ export class Controllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when updating seed with id ${seed_id}.`,
+            error: `Error when updating light with id ${light_id}.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {
@@ -115,10 +115,10 @@ export class Controllers {
       });
   }
 
-  @Delete(':seed_id')
-  async delete(@Param('seed_id', ParseIntPipe) seed_id: number) {
+  @Delete(':light_id')
+  async delete(@Param('light_id', ParseIntPipe) light_id: number) {
     return await this.service
-      .delete(seed_id)
+      .delete(light_id)
       .then((res) => {
         return res;
       })
@@ -126,7 +126,7 @@ export class Controllers {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when delete seed with id ${seed_id}.`,
+            error: `Error when delete light with id ${light_id}.`,
           },
           HttpStatus.INTERNAL_SERVER_ERROR,
           {

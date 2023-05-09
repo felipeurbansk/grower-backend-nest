@@ -1,4 +1,4 @@
-export class FilterBody {
+export class FilterPlantBody {
   name: string;
 
   width: number;

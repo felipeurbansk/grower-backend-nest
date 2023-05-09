@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class CreateBody {
+export class CreatePlantBody {
   @IsNotEmpty()
   name: string;
 

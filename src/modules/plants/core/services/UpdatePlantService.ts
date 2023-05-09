@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from '../repositories/Repository';
+import { PlantRepository } from '../repositories/PlantRepository';
 
 @Injectable()
-export class UpdateService {
-  constructor(private readonly repository: Repository) {}
+export class UpdatePlantService {
+  constructor(private readonly repository: PlantRepository) {}
 
   async handle(plant_id: number, data: any): Promise<any> {
     return await this.repository.update(plant_id, data);

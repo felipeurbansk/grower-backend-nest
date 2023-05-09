@@ -1,29 +1,29 @@
 import { Body, Injectable, Param, ParseIntPipe } from '@nestjs/common';
-import { CreateService } from './CreateService';
-import { GetByIdService } from './GetByIdService';
-import { FilterService } from './FilterService';
-import { UpdateService } from './UpdateService';
-import { DeleteService } from './DeleteService';
+import { CreateLightService } from './CreateLightService';
+import { GetLightByIdService } from './GetLightByIdService';
+import { FilterLightService } from './FilterLightService';
+import { UpdateLightService } from './UpdateLightService';
+import { DeleteLightService } from './DeleteLightService';
 
-import { CreateBody } from '../dtos/CreateBody';
-import { FilterBody } from '../dtos/FilterBody';
-import { UpdateBody } from '../dtos/UpdateBody';
+import { CreateLightBody } from '../dtos/CreateLightBody';
+import { FilterLightBody } from '../dtos/FilterLightBody';
+import { UpdateLightBody } from '../dtos/UpdateLightBody';
 
 @Injectable()
-export class Service {
+export class LightService {
   constructor(
-    private readonly createService: CreateService,
-    private readonly filterService: FilterService,
-    private readonly getByIdService: GetByIdService,
-    private readonly updateService: UpdateService,
-    private readonly deleteService: DeleteService,
+    private readonly createService: CreateLightService,
+    private readonly filterService: FilterLightService,
+    private readonly getByIdService: GetLightByIdService,
+    private readonly updateService: UpdateLightService,
+    private readonly deleteService: DeleteLightService,
   ) {}
 
-  async create(@Body() data: CreateBody) {
+  async create(@Body() data: CreateLightBody) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterBody) {
+  async get(@Body() filter: FilterLightBody) {
     return await this.filterService.handle(filter);
   }
 
@@ -33,7 +33,7 @@ export class Service {
 
   async update(
     @Param('light_id', ParseIntPipe) light_id: number,
-    @Body() data: UpdateBody,
+    @Body() data: UpdateLightBody,
   ) {
     return await this.updateService.handle(light_id, data);
   }

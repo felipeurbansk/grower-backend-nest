@@ -1,25 +1,25 @@
 import { Body, Injectable, Param, ParseIntPipe } from '@nestjs/common';
-import { CreateService } from './CreateService';
-import { GetByIdService } from './GetByIdService';
-import { FilterService } from './FilterService';
-import { UpdateService } from './UpdateService';
-import { DeleteService } from './DeleteService';
+import { CreateSeedService } from './CreateSeedService';
+import { GetSeedByIdService } from './GetSeedByIdService';
+import { FilterSeedService } from './FilterSeedService';
+import { UpdateSeedService } from './UpdateSeedService';
+import { DeleteSeedService } from './DeleteSeedService';
 
-import { CreateBody } from '../dtos/CreateBody';
-import { FilterBody } from '../dtos/FilterBody';
-import { UpdateBody } from '../dtos/UpdateBody';
+import { CreateSeedBody } from '../dtos/CreateSeedBody';
+import { FilterBody } from '../dtos/FilterSeedBody';
+import { UpdateBody } from '../dtos/UpdateSeedBody';
 
 @Injectable()
-export class Service {
+export class SeedService {
   constructor(
-    private readonly createService: CreateService,
-    private readonly filterService: FilterService,
-    private readonly getByIdService: GetByIdService,
-    private readonly updateService: UpdateService,
-    private readonly deleteService: DeleteService,
+    private readonly createService: CreateSeedService,
+    private readonly filterService: FilterSeedService,
+    private readonly getByIdService: GetSeedByIdService,
+    private readonly updateService: UpdateSeedService,
+    private readonly deleteService: DeleteSeedService,
   ) {}
 
-  async create(@Body() data: CreateBody) {
+  async create(@Body() data: CreateSeedBody) {
     return await this.createService.handle(data);
   }
 

@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class CreateBody {
+export class CreateLightBody {
   @IsNotEmpty()
   @IsString()
   name: string;

@@ -1,28 +1,28 @@
 import { Module } from '@nestjs/common';
-import { Controllers } from './controllers/Controllers';
-import { Service } from './core/services';
-import { CreateService } from './core/services/CreateService';
-import { DeleteService } from './core/services/DeleteService';
-import { FilterService } from './core/services/FilterService';
-import { GetByIdService } from './core/services/GetByIdService';
-import { UpdateService } from './core/services/UpdateService';
-import { Repository } from './core/repositories/Repository';
-import { PrismaRepository } from './core/repositories/prisma/PrismaRepository';
+import { PlantControllers } from './controllers/PlantControllers';
+import { PlantService } from './core/services';
+import { CreatePlantService } from './core/services/CreatePlantService';
+import { DeletePlantService } from './core/services/DeletePlantService';
+import { FilterPlantService } from './core/services/FilterPlantService';
+import { GetPlantByIdService } from './core/services/GetPlantByIdService';
+import { UpdatePlantService } from './core/services/UpdatePlantService';
+import { PlantRepository } from './core/repositories/PlantRepository';
+import { PrismaPlantRepository } from './core/repositories/prisma/PrismaPlantRepository';
 import { PrismaService } from '../../infra/database/PrismaService';
 
 @Module({
-  controllers: [Controllers],
+  controllers: [PlantControllers],
   providers: [
     {
-      provide: Repository,
-      useClass: PrismaRepository,
+      provide: PlantRepository,
+      useClass: PrismaPlantRepository,
     },
-    CreateService,
-    DeleteService,
-    FilterService,
-    GetByIdService,
-    UpdateService,
-    Service,
+    CreatePlantService,
+    DeletePlantService,
+    FilterPlantService,
+    GetPlantByIdService,
+    UpdatePlantService,
+    PlantService,
     PrismaService,
   ],
 })

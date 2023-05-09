@@ -1,9 +1,9 @@
-import { Repository } from '../Repository';
+import { PlantRepository } from '../PlantRepository';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/infra/database/PrismaService';
 
 @Injectable()
-export class PrismaRepository implements Repository {
+export class PrismaPlantRepository implements PlantRepository {
   constructor(private prisma: PrismaService) {}
 
   async create(data: any): Promise<any> {

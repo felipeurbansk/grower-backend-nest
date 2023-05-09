@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from '../repositories/Repository';
+import { PlantRepository } from '../repositories/PlantRepository';
 
 @Injectable()
-export class GetByIdService {
-  constructor(private readonly repository: Repository) {}
+export class GetPlantByIdService {
+  constructor(private readonly repository: PlantRepository) {}
 
   async handle(plant_id: number): Promise<any> {
     return await this.repository.getById(plant_id);
