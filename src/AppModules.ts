@@ -9,6 +9,7 @@ import { PlantModule } from './modules/plants';
 import { UserModule } from './modules/users';
 
 import { AuthModule } from './auth';
+import { FarmingModule } from './modules/farmings';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AuthModule } from './auth';
     HumidtyModule,
     PlantModule,
     UserModule,
+    FarmingModule,
     AuthModule,
   ],
 })
