@@ -11,6 +11,7 @@ import { FilterUserService } from './core/services/FilterUserService';
 import { GetUserByIdService } from './core/services/GetUserByIdService';
 import { UpdateUserService } from './core/services/UpdateUserService';
 import { GetUserByEmailService } from './core/services/GetUserByEmailService';
+import { GeneratePassword } from '../../tools/GeneratePassword';
 
 @Module({
   exports: [UserServices],
@@ -20,6 +21,7 @@ import { GetUserByEmailService } from './core/services/GetUserByEmailService';
       provide: UserRepository,
       useClass: PrismaUserRepository,
     },
+    GeneratePassword,
     CreateUserService,
     DeleteUserService,
     FilterUserService,
