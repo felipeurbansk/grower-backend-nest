@@ -10,81 +10,104 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Grows {
-  id Int @default(autoincrement()) @id
-  name String
-  height Int
-  width Int
-  depth Int
-  status String?
-  farming Farming[]
+model grows {
+  id      Int        @id @default(autoincrement())
+  name    String
+  height  Int
+  width   Int
+  depth   Int
+  status  String?
+  user_id Int
+  user    users      @relation(fields: [user_id], references: [id])
+  farming farmings[]
 }
 
-model Seeds {
-  id Int @default(autoincrement()) @id
-  name String
-  bank_name String?
+model seeds {
+  id               Int      @id @default(autoincrement())
+  name             String
+  bank_name        String?
   vegetative_weeks Int?
-  flowering_weeks Int?
+  flowering_weeks  Int?
   per_square_meter Int?
-  status String?
+  status           String?
+  user_id          Int
+  user             users    @relation(fields: [user_id], references: [id])
+  plants           plants[]
 }
 
-model Lights {
-  id Int @default(autoincrement()) @id
-  name String
-  watts Int?
-  lumens Int?
-  status String?
-}
-model Temperatures {
-  id Int @default(autoincrement()) @id
-  base_component_id Int
-  value Int
-  base_component BaseComponents @relation(fields: [base_component_id], references: [id])
+model lights {
+  id      Int        @id @default(autoincrement())
+  name    String
+  watts   Int?
+  lumens  Int?
+  status  String?
+  user_id Int
+  user    users      @relation(fields: [user_id], references: [id])
+  farming farmings[]
 }
 
-model Humidities {
-  id Int @default(autoincrement()) @id
-  base_component_id Int
-  value Int
-  base_component BaseComponents @relation(fields: [base_component_id], references: [id])
-}
-
-model BaseComponents {
-  id Int @default(autoincrement()) @id
-  ip String
-  mac String
-  temperatures Temperatures[]
-  humidities Humidities[]
-}
-
-model Plants {
-  id Int @default(autoincrement()) @id
-  seed_id String
-  qrcode String?
-  init_germination DateTime?
-  init_vegetative DateTime?
-  init_flowering DateTime?
-  init_drying DateTime?
-  init_cure DateTime?
+model temperatures {
+  id         Int      @id @default(autoincrement())
+  value      Int
   farming_id Int
-  farming Farming @relation(fields: [farming_id], references: [id])
+  farming    farmings @relation(fields: [farming_id], references: [id])
 }
 
-model Farming {
-  id Int @default(autoincrement()) @id
-  plants Plants[]
-  grow Grows @relation(fields: [grow_id], references: [id])
-  grow_id Int
+model humidities {
+  id         Int      @id @default(autoincrement())
+  value      Int
+  farming_id Int
+  farming    farmings @relation(fields: [farming_id], references: [id])
 }
 
-model Users {
-  id Int @default(autoincrement()) @id
-  full_name String
-  username String @unique
-  email String @unique
-  password String
-  status String?
+model base_components {
+  id       Int        @id @default(autoincrement())
+  ip       String
+  mac      String
+  user_id  Int
+  user     users      @relation(fields: [user_id], references: [id])
+  farmings farmings[]
 }
 
+model plants {
+  id               Int       @id @default(autoincrement())
+  qrcode           String?
+  init_germination DateTime?
+  init_vegetative  DateTime?
+  init_flowering   DateTime?
+  init_drying      DateTime?
+  init_cure        DateTime?
+  farming_id       Int
+  seed_id          Int
+  farming          farmings  @relation(fields: [farming_id], references: [id])
+  seed             seeds     @relation(fields: [seed_id], references: [id])
+}
+
+model farmings {
+  id                Int             @id @default(autoincrement())
+  light_id          Int
+  grow_id           Int
+  base_component_id Int
+  user_id           Int
+  grow              grows           @relation(fields: [grow_id], references: [id])
+  light             lights          @relation(fields: [light_id], references: [id])
+  base_component    base_components @relation(fields: [base_component_id], references: [id])
+  user              users           @relation(fields: [user_id], references: [id])
+  plants            plants[]
+  temperatures      temperatures[]
+  humidities        humidities[]
+}
+
+model users {
+  id              Int               @id @default(autoincrement())
+  full_name       String
+  username        String            @unique
+  email           String            @unique
+  password        String
+  status          String?
+  farmings        farmings[]
+  grows           grows[]
+  base_components base_components[]
+  lights          lights[]
+  seeds           seeds[]
+}
