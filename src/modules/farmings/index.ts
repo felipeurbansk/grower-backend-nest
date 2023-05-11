@@ -9,6 +9,7 @@ import { UpdateFarmingService } from './core/services/UpdateFarmingService';
 import { FarmingRepository } from './core/repositories/FarmingRepository';
 import { PrismaFarmingRepository } from './core/repositories/prisma/PrismaFarmingRepository';
 import { PrismaService } from '../../infra/database/PrismaService';
+import { DecodeJWTToken } from 'src/tools/DecodeJWTToken';
 
 @Module({
   exports: [FarmingService],
@@ -25,6 +26,7 @@ import { PrismaService } from '../../infra/database/PrismaService';
     UpdateFarmingService,
     FarmingService,
     PrismaService,
+    DecodeJWTToken,
   ],
 })
 export class FarmingModule {}
