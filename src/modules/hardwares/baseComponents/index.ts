@@ -9,6 +9,9 @@ import { UpdateBaseComponentService } from './core/services/UpdateBaseComponentS
 import { BaseComponentRepository } from './core/repositories/BaseComponentRepository';
 import { PrismaBaseComponentRepository } from './core/repositories/prisma/PrismaBaseComponentRepository';
 import { PrismaService } from '../../../infra/database/PrismaService';
+import { DecodeJWTToken } from 'src/tools/DecodeJWTToken';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { UserIdBodyInterceptor } from 'src/auth/interceptor/UserIdBodyInterceptor';
 
 @Module({
   exports: [BaseComponentService],
@@ -18,6 +21,10 @@ import { PrismaService } from '../../../infra/database/PrismaService';
       provide: BaseComponentRepository,
       useClass: PrismaBaseComponentRepository,
     },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: UserIdBodyInterceptor,
+    },
     CreateBaseComponentService,
     DeleteBaseComponentService,
     FilterBaseComponentService,
@@ -25,6 +32,7 @@ import { PrismaService } from '../../../infra/database/PrismaService';
     UpdateBaseComponentService,
     BaseComponentService,
     PrismaService,
+    DecodeJWTToken,
   ],
 })
 export class BaseComponentModule {}

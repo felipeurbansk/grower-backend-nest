@@ -8,6 +8,7 @@ import { jwtConstants } from './constants/JWTConstants';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './core/guard/AuthGuard';
 import { ComparePassword } from 'src/tools/ComparePassword';
+import { DecodeJWTToken } from 'src/tools/DecodeJWTToken';
 
 @Module({
   exports: [AuthService],
@@ -28,6 +29,7 @@ import { ComparePassword } from 'src/tools/ComparePassword';
       useClass: AuthGuard,
     },
     ComparePassword,
+    DecodeJWTToken,
   ],
 })
 export class AuthModule {}

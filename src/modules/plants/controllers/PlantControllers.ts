@@ -1,6 +1,3 @@
-import { CreatePlantBody } from '../core/dtos/CreatePlantBody';
-import { UpdatePlantBody } from '../core/dtos/UpdatePlantBody';
-import { FilterPlantBody } from '../core/dtos/FilterPlantBody';
 import {
   Body,
   Controller,
@@ -14,6 +11,9 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { PlantService } from '../core/services';
+import { CreatePlantBody } from '../core/dtos/CreatePlantBody';
+import { UpdatePlantBody } from '../core/dtos/UpdatePlantBody';
+import { FilterPlantBody } from '../core/dtos/FilterPlantBody';
 
 @Controller('plants')
 export class PlantControllers {

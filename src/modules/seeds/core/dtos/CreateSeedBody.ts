@@ -16,4 +16,7 @@ export class CreateSeedBody {
 
   @IsNumber()
   per_square_meter: number;
+
+  @IsNumber()
+  user_id: number;
 }

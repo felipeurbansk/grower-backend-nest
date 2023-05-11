@@ -9,6 +9,7 @@ import { UpdateGrowService } from './core/services/UpdateGrowService';
 import { GrowRepository } from './core/repositories/GrowRepository';
 import { PrismaGrowRepository } from './core/repositories/prisma/PrismaGrowRepository';
 import { PrismaService } from '../../infra/database/PrismaService';
+import { DecodeJWTToken } from 'src/tools/DecodeJWTToken';
 
 @Module({
   exports: [GrowService],
@@ -25,6 +26,7 @@ import { PrismaService } from '../../infra/database/PrismaService';
     UpdateGrowService,
     GrowService,
     PrismaService,
+    DecodeJWTToken,
   ],
 })
 export class GrowModule {}

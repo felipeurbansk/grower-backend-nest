@@ -9,6 +9,9 @@ import { UpdatePlantService } from './core/services/UpdatePlantService';
 import { PlantRepository } from './core/repositories/PlantRepository';
 import { PrismaPlantRepository } from './core/repositories/prisma/PrismaPlantRepository';
 import { PrismaService } from '../../infra/database/PrismaService';
+import { DecodeJWTToken } from 'src/tools/DecodeJWTToken';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { UserIdBodyInterceptor } from 'src/auth/interceptor/UserIdBodyInterceptor';
 
 @Module({
   exports: [PlantService],
@@ -18,6 +21,10 @@ import { PrismaService } from '../../infra/database/PrismaService';
       provide: PlantRepository,
       useClass: PrismaPlantRepository,
     },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: UserIdBodyInterceptor,
+    },
     CreatePlantService,
     DeletePlantService,
     FilterPlantService,
@@ -25,6 +32,7 @@ import { PrismaService } from '../../infra/database/PrismaService';
     UpdatePlantService,
     PlantService,
     PrismaService,
+    DecodeJWTToken,
   ],
 })
 export class PlantModule {}
