@@ -18,8 +18,8 @@ model grows {
   depth   Int
   status  String?
   user_id Int
-  user    users      @relation(fields: [user_id], references: [id])
   farming farmings[]
+  user    users      @relation(fields: [user_id], references: [id])
 }
 
 model seeds {
@@ -31,8 +31,8 @@ model seeds {
   per_square_meter Int?
   status           String?
   user_id          Int
-  user             users    @relation(fields: [user_id], references: [id])
   plants           plants[]
+  user             users    @relation(fields: [user_id], references: [id])
 }
 
 model lights {
@@ -42,8 +42,8 @@ model lights {
   lumens  Int?
   status  String?
   user_id Int
-  user    users      @relation(fields: [user_id], references: [id])
   farming farmings[]
+  user    users      @relation(fields: [user_id], references: [id])
 }
 
 model temperatures {
@@ -65,8 +65,8 @@ model base_components {
   ip       String
   mac      String
   user_id  Int
-  user     users      @relation(fields: [user_id], references: [id])
   farmings farmings[]
+  user     users      @relation(fields: [user_id], references: [id])
 }
 
 model plants {
@@ -89,13 +89,13 @@ model farmings {
   grow_id           Int
   base_component_id Int
   user_id           Int
-  grow              grows           @relation(fields: [grow_id], references: [id])
-  light             lights          @relation(fields: [light_id], references: [id])
-  base_component    base_components @relation(fields: [base_component_id], references: [id])
-  user              users           @relation(fields: [user_id], references: [id])
   plants            plants[]
   temperatures      temperatures[]
   humidities        humidities[]
+  light             lights          @relation(fields: [light_id], references: [id])
+  grow              grows           @relation(fields: [grow_id], references: [id])
+  base_component    base_components? @relation(fields: [base_component_id], references: [id])
+  user              users           @relation(fields: [user_id], references: [id])
 }
 
 model users {

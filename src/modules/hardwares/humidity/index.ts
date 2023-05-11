@@ -9,6 +9,9 @@ import { UpdateHumidityService } from './core/services/UpdateHumidityService';
 import { HumidityRepository } from './core/repositories/HumidityRepository';
 import { PrismaHumidityRepository } from './core/repositories/prisma/PrismaHumidityRepository';
 import { PrismaService } from '../../../infra/database/PrismaService';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { UserIdBodyInterceptor } from 'src/auth/interceptor/UserIdBodyInterceptor';
+import { DecodeJWTToken } from 'src/tools/DecodeJWTToken';
 
 @Module({
   exports: [HumidityService],
@@ -18,6 +21,11 @@ import { PrismaService } from '../../../infra/database/PrismaService';
       provide: HumidityRepository,
       useClass: PrismaHumidityRepository,
     },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: UserIdBodyInterceptor,
+    },
+    DecodeJWTToken,
     CreateHumidityService,
     DeleteHumidityService,
     FilterHumidityService,

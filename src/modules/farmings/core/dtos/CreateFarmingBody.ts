@@ -1,19 +1,25 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsNotEmpty, IsNumber, ValidateNested } from 'class-validator';
+import { CreatePlantBody } from 'src/modules/plants/core/dtos/CreatePlantBody';
 
 export class CreateFarmingBody {
   @IsNotEmpty()
-  @IsString()
-  name: string;
-
-  @IsString()
-  bank_name: string;
-
   @IsNumber()
-  vegetative_weeks: number;
+  user_id: number;
 
+  @IsNotEmpty()
   @IsNumber()
-  flowering_weeks: number;
+  light_id: number;
 
+  @IsNotEmpty()
   @IsNumber()
-  per_square_meter: number;
+  grow_id: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  base_component_id: number;
+
+  @IsNotEmpty()
+  @IsArray()
+  @ValidateNested({ each: true })
+  plants: CreatePlantBody[];
 }

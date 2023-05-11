@@ -1,15 +1,25 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsDate, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreatePlantBody {
   @IsNotEmpty()
-  name: string;
+  @IsNumber()
+  farming_id: number;
 
   @IsNotEmpty()
-  width: number;
+  @IsNumber()
+  seed_id: number;
 
   @IsNotEmpty()
-  depth: number;
+  @IsDate()
+  init_germination: Date;
 
-  @IsNotEmpty()
-  height: number;
+  init_vegetative: Date;
+
+  init_flowering: Date;
+
+  init_drying: Date;
+
+  init_cure: Date;
+
+  qrcode: string;
 }

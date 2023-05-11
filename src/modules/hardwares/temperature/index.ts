@@ -9,6 +9,9 @@ import { UpdateTemperatureService } from './core/services/UpdateTemperatureServi
 import { TemperatureRepository } from './core/repositories/TemperatureRepository';
 import { PrismaTemperatureRepository } from './core/repositories/prisma/PrismaTemperatureRepository';
 import { PrismaService } from '../../../infra/database/PrismaService';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { UserIdBodyInterceptor } from 'src/auth/interceptor/UserIdBodyInterceptor';
+import { DecodeJWTToken } from 'src/tools/DecodeJWTToken';
 
 @Module({
   exports: [TemperatureService],
@@ -18,6 +21,11 @@ import { PrismaService } from '../../../infra/database/PrismaService';
       provide: TemperatureRepository,
       useClass: PrismaTemperatureRepository,
     },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: UserIdBodyInterceptor,
+    },
+    DecodeJWTToken,
     CreateTemperatureService,
     DeleteTemperatureService,
     FilterTemperatureService,

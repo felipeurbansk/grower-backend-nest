@@ -1,9 +1,17 @@
 export class FilterPlantBody {
-  name: string;
+  qrcode: string;
 
-  width: number;
+  farming_id: number;
 
-  depth: number;
+  seed_id: number;
 
-  height: number;
+  init_germination: Date;
+
+  init_vegetative: Date;
+
+  init_flowering: Date;
+
+  init_drying: Date;
+
+  init_cure: Date;
 }

@@ -9,6 +9,9 @@ import { UpdateSeedService } from './core/services/UpdateSeedService';
 import { SeedRepository } from './core/repositories/SeedRepository';
 import { PrismaSeedRepository } from './core/repositories/prisma/PrismaSeedRepository';
 import { PrismaService } from '../../infra/database/PrismaService';
+import { DecodeJWTToken } from 'src/tools/DecodeJWTToken';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { UserIdBodyInterceptor } from 'src/auth/interceptor/UserIdBodyInterceptor';
 
 @Module({
   exports: [SeedService],
@@ -18,6 +21,11 @@ import { PrismaService } from '../../infra/database/PrismaService';
       provide: SeedRepository,
       useClass: PrismaSeedRepository,
     },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: UserIdBodyInterceptor,
+    },
+    DecodeJWTToken,
     CreateSeedService,
     DeleteSeedService,
     FilterSeedService,

@@ -9,6 +9,9 @@ import { UpdateLightService } from './core/services/UpdateLightService';
 import { LightRepository } from './core/repositories/LightRepository';
 import { PrismaLightRepository } from './core/repositories/prisma/PrismaLightRepository';
 import { PrismaService } from '../../infra/database/PrismaService';
+import { DecodeJWTToken } from 'src/tools/DecodeJWTToken';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { UserIdBodyInterceptor } from 'src/auth/interceptor/UserIdBodyInterceptor';
 
 @Module({
   exports: [LightService],
@@ -18,6 +21,10 @@ import { PrismaService } from '../../infra/database/PrismaService';
       provide: LightRepository,
       useClass: PrismaLightRepository,
     },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: UserIdBodyInterceptor,
+    },
     CreateLightService,
     DeleteLightService,
     FilterLightService,
@@ -25,6 +32,7 @@ import { PrismaService } from '../../infra/database/PrismaService';
     UpdateLightService,
     LightService,
     PrismaService,
+    DecodeJWTToken,
   ],
 })
 export class LightModule {}

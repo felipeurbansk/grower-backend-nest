@@ -27,6 +27,7 @@ export class FarmingControllers {
         return res;
       })
       .catch((err) => {
+        console.log({ err });
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,

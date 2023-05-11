@@ -15,7 +15,7 @@ import {
 } from '@nestjs/common';
 import { BaseComponentService } from '../core/services';
 
-@Controller('baseComponents')
+@Controller('base_components')
 export class BaseComponentControllers {
   constructor(private readonly service: BaseComponentService) {}
 

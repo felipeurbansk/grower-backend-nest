@@ -1,11 +1,9 @@
 export class UpdateBody {
-  name: string;
+  light_id: number;
 
-  bank_name: string;
+  grow_id: number;
 
-  vegetative_weeks: number;
+  base_component_id: number;
 
-  flowering_weeks: number;
-
-  per_square_meter: number;
+  plants: object;
 }
