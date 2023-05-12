@@ -7,71 +7,67 @@ import { CreateFarmingBody } from '../../dtos/CreateFarmingBody';
 export class PrismaFarmingRepository implements FarmingRepository {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateFarmingBody): Promise<any> {
-    const { user_id, grow_id, light_id, base_component_id, plants } = data;
-
-    return await this.prisma.farmings.create({
-      data: {
-        user_id,
-        grow_id,
-        light_id,
-        base_component_id,
-        plants: {
-          create: plants.map((plant) => {
-            return {
-              ...plant,
-
-              init_germination: plant.init_germination
-                ? new Date(plant.init_germination)
-                : null,
-
-              init_vegetative: plant.init_vegetative
-                ? new Date(plant.init_vegetative)
-                : null,
-
-              init_flowering: plant.init_flowering
-                ? new Date(plant.init_flowering)
-                : null,
-
-              init_drying: plant.init_drying
-                ? new Date(plant.init_drying)
-                : null,
-
-              init_cure: plant.init_cure ? new Date(plant.init_cure) : null,
-            };
-          }),
-        },
-      },
-    });
+  async create(data: any): Promise<any> {
+    return await this.prisma.farmings.create(data);
   }
 
-  async update(farming_id: number, data: any): Promise<any> {
+  async update(farming_id: number, data: any): Promise<CreateFarmingBody> {
     return await this.prisma.farmings.update({
       where: {
         id: farming_id,
+      },
+      include: {
+        plants: true,
       },
       data,
     });
   }
 
-  async delete(farming_id: number): Promise<any> {
+  async delete(farming_id: number): Promise<CreateFarmingBody> {
     return await this.prisma.farmings.delete({
       where: {
         id: farming_id,
       },
+      include: {
+        plants: true,
+      },
     });
   }
 
-  async getAll(filter: any): Promise<any[]> {
+  async getAll(filter: any): Promise<CreateFarmingBody[]> {
     return await this.prisma.farmings.findMany({
       where: filter,
+      include: {
+        base_component: true,
+        plants: {
+          include: {
+            seed: true,
+          },
+        },
+        light: true,
+        grow: true,
+        humidities: true,
+        temperatures: true,
+      },
     });
   }
 
-  async getById(farming_id: number): Promise<any> {
+  async getById(farming_id: number): Promise<CreateFarmingBody> {
     return await this.prisma.farmings.findUnique({
       where: {
         id: farming_id,
+      },
+      include: {
+        base_component: true,
+        plants: {
+          include: {
+            seed: true,
+          },
+        },
+        light: true,
+        grow: true,
+        humidities: true,
+        temperatures: true,
       },
     });
   }

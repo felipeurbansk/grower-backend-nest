@@ -12,10 +12,8 @@ import {
   Delete,
   HttpException,
   HttpStatus,
-  UseInterceptors,
 } from '@nestjs/common';
 import { LightService } from '../core/services';
-import { UserIdBodyInterceptor } from 'src/auth/interceptor/UserIdBodyInterceptor';
 
 @Controller('lights')
 export class LightControllers {
