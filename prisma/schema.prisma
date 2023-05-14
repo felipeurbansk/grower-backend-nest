@@ -48,14 +48,14 @@ model lights {
 
 model temperatures {
   id         Int      @id @default(autoincrement())
-  value      Int
+  value      Float
   farming_id Int
   farming    farmings @relation(fields: [farming_id], references: [id])
 }
 
 model humidities {
   id         Int      @id @default(autoincrement())
-  value      Int
+  value      Float
   farming_id Int
   farming    farmings @relation(fields: [farming_id], references: [id])
 }
