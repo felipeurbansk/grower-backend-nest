@@ -11,16 +11,16 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { PlantService } from '../core/services';
-import { CreatePlantBody } from '../core/dtos/CreatePlantBody';
-import { UpdatePlantBody } from '../core/dtos/UpdatePlantBody';
-import { FilterPlantBody } from '../core/dtos/FilterPlantBody';
+import { CreatePlantDTO } from '../core/dtos/CreatePlantDTO';
+import { UpdatePlantDTO } from '../core/dtos/UpdatePlantDTO';
+import { FilterPlantDTO } from '../core/dtos/FilterPlantDTO';
 
 @Controller('plants')
 export class PlantControllers {
   constructor(private readonly service: PlantService) {}
 
   @Post()
-  async create(@Body() data: CreatePlantBody) {
+  async create(@Body() data: CreatePlantDTO) {
     return await this.service
       .create(data)
       .then((res) => {
@@ -41,7 +41,7 @@ export class PlantControllers {
   }
 
   @Get()
-  async get(@Body() filter: FilterPlantBody) {
+  async get(@Body() filter: FilterPlantDTO) {
     return await this.service
       .get(filter)
       .then((res) => {
@@ -94,7 +94,7 @@ export class PlantControllers {
   @Put(':plant_id')
   async update(
     @Param('plant_id', ParseIntPipe) plant_id: number,
-    @Body() data: UpdatePlantBody,
+    @Body() data: UpdatePlantDTO,
   ) {
     return await this.service
       .update(plant_id, data)

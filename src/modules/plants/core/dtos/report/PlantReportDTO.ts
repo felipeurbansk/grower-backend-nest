@@ -1,4 +1,4 @@
-export class PlantReportBody {
+export class PlantReportDTO {
   ended_germination?: Date;
 
   ended_vegetative?: Date;

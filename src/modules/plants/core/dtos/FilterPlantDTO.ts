@@ -1,4 +1,4 @@
-export class UpdatePlantBody {
+export class FilterPlantDTO {
   qrcode: string;
 
   farming_id: number;
