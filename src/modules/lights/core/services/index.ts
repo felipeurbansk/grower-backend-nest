@@ -5,9 +5,9 @@ import { FilterLightService } from './FilterLightService';
 import { UpdateLightService } from './UpdateLightService';
 import { DeleteLightService } from './DeleteLightService';
 
-import { CreateLightBody } from '../dtos/CreateLightBody';
-import { FilterLightBody } from '../dtos/FilterLightBody';
-import { UpdateLightBody } from '../dtos/UpdateLightBody';
+import { CreateLightDTO } from '../dtos/CreateLightDTO';
+import { FilterLightDTO } from '../dtos/FilterLightDTO';
+import { UpdateLightDTO } from '../dtos/UpdateLightDTO';
 
 @Injectable()
 export class LightService {
@@ -19,11 +19,11 @@ export class LightService {
     private readonly deleteService: DeleteLightService,
   ) {}
 
-  async create(@Body() data: CreateLightBody) {
+  async create(@Body() data: CreateLightDTO) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterLightBody) {
+  async get(@Body() filter: FilterLightDTO) {
     return await this.filterService.handle(filter);
   }
 
@@ -33,7 +33,7 @@ export class LightService {
 
   async update(
     @Param('light_id', ParseIntPipe) light_id: number,
-    @Body() data: UpdateLightBody,
+    @Body() data: UpdateLightDTO,
   ) {
     return await this.updateService.handle(light_id, data);
   }

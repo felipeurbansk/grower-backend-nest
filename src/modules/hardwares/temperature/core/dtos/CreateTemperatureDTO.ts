@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class CreateTemperatureBody {
+export class CreateTemperatureDTO {
   @IsNotEmpty()
   @IsNumber()
   base_component_id: number;

@@ -5,9 +5,9 @@ import { FilterFarmingService } from './FilterFarmingService';
 import { UpdateFarmingService } from './UpdateFarmingService';
 import { DeleteFarmingService } from './DeleteFarmingService';
 
-import { CreateFarmingBody } from '../dtos/CreateFarmingBody';
-import { FilterBody } from '../dtos/FilterFarmingBody';
-import { UpdateBody } from '../dtos/UpdateFarmingBody';
+import { CreateFarmingDTO } from '../dtos/CreateFarmingDTO';
+import { FilterFarmingDTO } from '../dtos/FilterFarmingDTO';
+import { UpdateFarmingDTO } from '../dtos/UpdateFarmingDTO';
 
 @Injectable()
 export class FarmingService {
@@ -19,11 +19,11 @@ export class FarmingService {
     private readonly deleteService: DeleteFarmingService,
   ) {}
 
-  async create(@Body() data: CreateFarmingBody) {
+  async create(@Body() data: CreateFarmingDTO) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterBody) {
+  async get(@Body() filter: FilterFarmingDTO) {
     return await this.filterService.handle(filter);
   }
 
@@ -33,7 +33,7 @@ export class FarmingService {
 
   async update(
     @Param('farming_id', ParseIntPipe) farming_id: number,
-    @Body() data: UpdateBody,
+    @Body() data: UpdateFarmingDTO,
   ) {
     return await this.updateService.handle(farming_id, data);
   }

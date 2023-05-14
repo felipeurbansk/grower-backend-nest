@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateBaseComponentBody {
+export class CreateBaseComponentDTO {
   @IsNotEmpty()
   @IsString()
   ip: string;

@@ -1,6 +1,6 @@
-import { CreateFarmingBody } from '../core/dtos/CreateFarmingBody';
-import { UpdateBody } from '../core/dtos/UpdateFarmingBody';
-import { FilterBody } from '../core/dtos/FilterFarmingBody';
+import { CreateFarmingDTO } from '../core/dtos/CreateFarmingDTO';
+import { UpdateFarmingDTO } from '../core/dtos/UpdateFarmingDTO';
+import { FilterFarmingDTO } from '../core/dtos/FilterFarmingDTO';
 import {
   Body,
   Controller,
@@ -20,7 +20,7 @@ export class FarmingControllers {
   constructor(private readonly service: FarmingService) {}
 
   @Post()
-  async create(@Body() data: CreateFarmingBody) {
+  async create(@Body() data: CreateFarmingDTO) {
     return await this.service
       .create(data)
       .then((res) => {
@@ -41,7 +41,7 @@ export class FarmingControllers {
   }
 
   @Get()
-  async get(@Body() filter: FilterBody) {
+  async get(@Body() filter: FilterFarmingDTO) {
     return await this.service
       .get(filter)
       .then((res) => {
@@ -94,7 +94,7 @@ export class FarmingControllers {
   @Put(':farming_id')
   async update(
     @Param('farming_id', ParseIntPipe) farming_id: number,
-    @Body() data: UpdateBody,
+    @Body() data: UpdateFarmingDTO,
   ) {
     return await this.service
       .update(farming_id, data)

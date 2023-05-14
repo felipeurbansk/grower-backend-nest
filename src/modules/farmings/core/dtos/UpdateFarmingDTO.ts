@@ -1,4 +1,4 @@
-export class FilterBody {
+export class UpdateFarmingDTO {
   light_id: number;
 
   grow_id: number;

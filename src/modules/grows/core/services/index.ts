@@ -1,12 +1,12 @@
 import { Body, Injectable, Param, ParseIntPipe } from '@nestjs/common';
-import { CreateGrowBody } from '../dtos/CreateGrowBody';
+import { CreateGrowDTO } from '../dtos/CreateGrowDTO';
 import { CreateGrowService } from './CreateGrowService';
 import { GetGrowByIdService } from './GetGrowByIdService';
 import { FilterGrowService } from './FilterGrowService';
 import { UpdateGrowService } from './UpdateGrowService';
 
-import { FilterGrowBody } from '../dtos/FilterGrowBody';
-import { UpdateGrowBody } from '../dtos/UpdateGrowBody';
+import { FilterGrowDTO } from '../dtos/FilterGrowDTO';
+import { UpdateGrowDTO } from '../dtos/UpdateGrowDTO';
 import { DeleteGrowService } from './DeleteGrowService';
 
 @Injectable()
@@ -19,11 +19,11 @@ export class GrowService {
     private readonly deleteService: DeleteGrowService,
   ) {}
 
-  async create(@Body() data: CreateGrowBody) {
+  async create(@Body() data: CreateGrowDTO) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterGrowBody) {
+  async get(@Body() filter: FilterGrowDTO) {
     return await this.filterService.handle(filter);
   }
 
@@ -33,7 +33,7 @@ export class GrowService {
 
   async update(
     @Param('grow_id', ParseIntPipe) grow_id: number,
-    @Body() data: UpdateGrowBody,
+    @Body() data: UpdateGrowDTO,
   ) {
     return await this.updateService.handle(grow_id, data);
   }

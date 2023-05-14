@@ -1,6 +1,6 @@
-import { CreateUserBody } from '../core/dtos/CreateUserBody';
-import { FilterUserBody } from '../core/dtos/FilterUserBody';
-import { UpdateUserBody } from '../core/dtos/UpdateUserBody';
+import { CreateUserDTO } from '../core/dtos/CreateUserDTO';
+import { FilterUserDTO } from '../core/dtos/FilterUserDTO';
+import { UpdateUserDTO } from '../core/dtos/UpdateUserDTO';
 import {
   Body,
   Controller,
@@ -20,7 +20,7 @@ export class UserControllers {
   constructor(private readonly service: UserServices) {}
 
   @Post()
-  async create(@Body() data: CreateUserBody) {
+  async create(@Body() data: CreateUserDTO) {
     return await this.service
       .create(data)
       .then((res) => {
@@ -41,7 +41,7 @@ export class UserControllers {
   }
 
   @Get()
-  async get(@Body() filter: FilterUserBody) {
+  async get(@Body() filter: FilterUserDTO) {
     return await this.service
       .get(filter)
       .then((res) => {
@@ -94,7 +94,7 @@ export class UserControllers {
   @Put(':user_id')
   async update(
     @Param('user_id', ParseIntPipe) user_id: number,
-    @Body() data: UpdateUserBody,
+    @Body() data: UpdateUserDTO,
   ) {
     return await this.service
       .update(user_id, data)

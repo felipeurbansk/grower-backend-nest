@@ -1,6 +1,6 @@
-import { CreateGrowBody } from '../core/dtos/CreateGrowBody';
-import { UpdateGrowBody } from '../core/dtos/UpdateGrowBody';
-import { FilterGrowBody } from '../core/dtos/FilterGrowBody';
+import { CreateGrowDTO } from '../core/dtos/CreateGrowDTO';
+import { UpdateGrowDTO } from '../core/dtos/UpdateGrowDTO';
+import { FilterGrowDTO } from '../core/dtos/FilterGrowDTO';
 import {
   Body,
   Controller,
@@ -20,7 +20,7 @@ export class GrowControllers {
   constructor(private readonly service: GrowService) {}
 
   @Post()
-  async create(@Body() data: CreateGrowBody) {
+  async create(@Body() data: CreateGrowDTO) {
     return await this.service
       .create(data)
       .then((res) => {
@@ -41,7 +41,7 @@ export class GrowControllers {
   }
 
   @Get()
-  async get(@Body() filter: FilterGrowBody) {
+  async get(@Body() filter: FilterGrowDTO) {
     return await this.service
       .get(filter)
       .then((res) => {
@@ -94,7 +94,7 @@ export class GrowControllers {
   @Put(':grow_id')
   async update(
     @Param('grow_id', ParseIntPipe) grow_id: number,
-    @Body() data: UpdateGrowBody,
+    @Body() data: UpdateGrowDTO,
   ) {
     return await this.service
       .update(grow_id, data)

@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { FarmingRepository } from '../repositories/FarmingRepository';
-import { CreateFarmingBody } from '../dtos/CreateFarmingBody';
+import { CreateFarmingDTO } from '../dtos/CreateFarmingDTO';
 
 @Injectable()
 export class CreateFarmingService {
   constructor(private readonly repository: FarmingRepository) {}
 
-  async handle(data: CreateFarmingBody): Promise<any> {
+  async handle(data: CreateFarmingDTO): Promise<any> {
     const { user_id, grow_id, light_id, base_component_id, plants } = data;
 
     const payload = {

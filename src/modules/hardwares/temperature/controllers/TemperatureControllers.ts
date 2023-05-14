@@ -1,6 +1,6 @@
-import { CreateTemperatureBody } from '../core/dtos/CreateTemperatureBody';
-import { UpdateTemperatureBody } from '../core/dtos/UpdateTemperatureBody';
-import { FilterTemperatureBody } from '../core/dtos/FilterTemperatureBody';
+import { CreateTemperatureDTO } from '../core/dtos/CreateTemperatureDTO';
+import { UpdateTemperatureDTO } from '../core/dtos/UpdateTemperatureDTO';
+import { FilterTemperatureDTO } from '../core/dtos/FilterTemperatureDTO';
 import {
   Body,
   Controller,
@@ -20,7 +20,7 @@ export class TemperatureControllers {
   constructor(private readonly service: TemperatureService) {}
 
   @Post()
-  async create(@Body() data: CreateTemperatureBody) {
+  async create(@Body() data: CreateTemperatureDTO) {
     return await this.service
       .create(data)
       .then((res) => {
@@ -41,7 +41,7 @@ export class TemperatureControllers {
   }
 
   @Get()
-  async get(@Body() filter: FilterTemperatureBody) {
+  async get(@Body() filter: FilterTemperatureDTO) {
     return await this.service
       .get(filter)
       .then((res) => {
@@ -94,7 +94,7 @@ export class TemperatureControllers {
   @Put(':temperature_id')
   async update(
     @Param('temperature_id', ParseIntPipe) temperature_id: number,
-    @Body() data: UpdateTemperatureBody,
+    @Body() data: UpdateTemperatureDTO,
   ) {
     return await this.service
       .update(temperature_id, data)

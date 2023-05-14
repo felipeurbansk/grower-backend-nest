@@ -1,6 +1,6 @@
-import { CreateHumidityBody } from '../core/dtos/CreateHumidityBody';
-import { UpdateHumidityBody } from '../core/dtos/UpdateHumidityBody';
-import { FilterHumidityBody } from '../core/dtos/FilterHumidityBody';
+import { CreateHumidityDTO } from '../core/dtos/CreateHumidityDTO';
+import { UpdateHumidityDTO } from '../core/dtos/UpdateHumidityDTO';
+import { FilterHumidityDTO } from '../core/dtos/FilterHumidityDTO';
 import {
   Body,
   Controller,
@@ -20,7 +20,7 @@ export class HumidityControllers {
   constructor(private readonly service: HumidityService) {}
 
   @Post()
-  async create(@Body() data: CreateHumidityBody) {
+  async create(@Body() data: CreateHumidityDTO) {
     return await this.service
       .create(data)
       .then((res) => {
@@ -41,7 +41,7 @@ export class HumidityControllers {
   }
 
   @Get()
-  async get(@Body() filter: FilterHumidityBody) {
+  async get(@Body() filter: FilterHumidityDTO) {
     return await this.service
       .get(filter)
       .then((res) => {
@@ -94,7 +94,7 @@ export class HumidityControllers {
   @Put(':humidty_id')
   async update(
     @Param('humidty_id', ParseIntPipe) humidty_id: number,
-    @Body() data: UpdateHumidityBody,
+    @Body() data: UpdateHumidityDTO,
   ) {
     return await this.service
       .update(humidty_id, data)

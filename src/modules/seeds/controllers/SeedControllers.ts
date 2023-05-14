@@ -1,6 +1,6 @@
-import { CreateSeedBody } from '../core/dtos/CreateSeedBody';
-import { UpdateBody } from '../core/dtos/UpdateSeedBody';
-import { FilterBody } from '../core/dtos/FilterSeedBody';
+import { CreateSeedDTO } from '../core/dtos/CreateSeedDTO';
+import { UpdateDTO } from '../core/dtos/UpdateSeedDTO';
+import { FilterDTO } from '../core/dtos/FilterSeedDTO';
 import {
   Body,
   Controller,
@@ -20,7 +20,7 @@ export class SeedControllers {
   constructor(private readonly service: SeedService) {}
 
   @Post()
-  async create(@Body() data: CreateSeedBody) {
+  async create(@Body() data: CreateSeedDTO) {
     return await this.service
       .create(data)
       .then((res) => {
@@ -41,7 +41,7 @@ export class SeedControllers {
   }
 
   @Get()
-  async get(@Body() filter: FilterBody) {
+  async get(@Body() filter: FilterDTO) {
     return await this.service
       .get(filter)
       .then((res) => {
@@ -94,7 +94,7 @@ export class SeedControllers {
   @Put(':seed_id')
   async update(
     @Param('seed_id', ParseIntPipe) seed_id: number,
-    @Body() data: UpdateBody,
+    @Body() data: UpdateDTO,
   ) {
     return await this.service
       .update(seed_id, data)

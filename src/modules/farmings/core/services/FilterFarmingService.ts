@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { FarmingRepository } from '../repositories/FarmingRepository';
-import { CreateFarmingBody } from '../dtos/CreateFarmingBody';
+import { CreateFarmingDTO } from '../dtos/CreateFarmingDTO';
 import { CreateFarmingReportService } from './report/CreateFarmingReportService';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class FilterFarmingService {
     private farmingReportService: CreateFarmingReportService,
   ) {}
 
-  async handle(filter: any): Promise<CreateFarmingBody[]> {
+  async handle(filter: any): Promise<CreateFarmingDTO[]> {
     const farmings = await this.repository.getAll(filter);
     let new_farmings;
 

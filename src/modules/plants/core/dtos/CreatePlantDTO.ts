@@ -1,5 +1,5 @@
 import { IsDate, IsNotEmpty, IsNumber } from 'class-validator';
-import { CreateSeedBody } from 'src/modules/seeds/core/dtos/CreateSeedBody';
+import { CreateSeedDTO } from 'src/modules/seeds/core/dtos/CreateSeedDTO';
 import { PlantReportDTO } from './report/PlantReportDTO';
 
 export class CreatePlantDTO {
@@ -25,7 +25,7 @@ export class CreatePlantDTO {
 
   init_cure?: Date;
 
-  seed?: CreateSeedBody;
+  seed?: CreateSeedDTO;
 
   report?: PlantReportDTO;
 }

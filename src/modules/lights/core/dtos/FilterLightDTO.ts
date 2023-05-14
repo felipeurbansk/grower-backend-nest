@@ -1,4 +1,4 @@
-export class FilterLightBody {
+export class FilterLightDTO {
   name: string;
 
   watts: number;

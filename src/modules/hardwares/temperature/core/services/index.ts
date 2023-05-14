@@ -1,13 +1,13 @@
 import { Body, Injectable, Param, ParseIntPipe } from '@nestjs/common';
-import { CreateTemperatureBody } from '../dtos/CreateTemperatureBody';
 import { CreateTemperatureService } from './CreateTemperatureService';
 import { GetTemperatureByIdService } from './GetTemperatureByIdService';
 import { FilterTemperatureService } from './FilterTemperatureService';
 import { UpdateTemperatureService } from './UpdateTemperatureService';
-
-import { FilterTemperatureBody } from '../dtos/FilterTemperatureBody';
-import { UpdateTemperatureBody } from '../dtos/UpdateTemperatureBody';
 import { DeleteTemperatureService } from './DeleteTemperatureService';
+
+import { CreateTemperatureDTO } from '../dtos/CreateTemperatureDTO';
+import { FilterTemperatureDTO } from '../dtos/FilterTemperatureDTO';
+import { UpdateTemperatureDTO } from '../dtos/UpdateTemperatureDTO';
 
 @Injectable()
 export class TemperatureService {
@@ -19,11 +19,11 @@ export class TemperatureService {
     private readonly deleteService: DeleteTemperatureService,
   ) {}
 
-  async create(@Body() data: CreateTemperatureBody) {
+  async create(@Body() data: CreateTemperatureDTO) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterTemperatureBody) {
+  async get(@Body() filter: FilterTemperatureDTO) {
     return await this.filterService.handle(filter);
   }
 
@@ -33,7 +33,7 @@ export class TemperatureService {
 
   async update(
     @Param('temperature_id', ParseIntPipe) temperature_id: number,
-    @Body() data: UpdateTemperatureBody,
+    @Body() data: UpdateTemperatureDTO,
   ) {
     return await this.updateService.handle(temperature_id, data);
   }

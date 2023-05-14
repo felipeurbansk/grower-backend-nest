@@ -1,6 +1,6 @@
-import { CreateBaseComponentBody } from '../core/dtos/CreateBaseComponentBody';
-import { UpdateBaseComponentBody } from '../core/dtos/UpdateBaseComponentBody';
-import { FilterBaseComponentBody } from '../core/dtos/FilterBaseComponentBody';
+import { CreateBaseComponentDTO } from '../core/dtos/CreateBaseComponentDTO';
+import { UpdateBaseComponentDTO } from '../core/dtos/UpdateBaseComponentDTO';
+import { FilterBaseComponentDTO } from '../core/dtos/FilterBaseComponentDTO';
 import {
   Body,
   Controller,
@@ -20,7 +20,7 @@ export class BaseComponentControllers {
   constructor(private readonly service: BaseComponentService) {}
 
   @Post()
-  async create(@Body() data: CreateBaseComponentBody) {
+  async create(@Body() data: CreateBaseComponentDTO) {
     return await this.service
       .create(data)
       .then((res) => {
@@ -41,7 +41,7 @@ export class BaseComponentControllers {
   }
 
   @Get()
-  async get(@Body() filter: FilterBaseComponentBody) {
+  async get(@Body() filter: FilterBaseComponentDTO) {
     return await this.service
       .get(filter)
       .then((res) => {
@@ -96,7 +96,7 @@ export class BaseComponentControllers {
   @Put(':baseComponent_id')
   async update(
     @Param('baseComponent_id', ParseIntPipe) baseComponent_id: number,
-    @Body() data: UpdateBaseComponentBody,
+    @Body() data: UpdateBaseComponentDTO,
   ) {
     return await this.service
       .update(baseComponent_id, data)

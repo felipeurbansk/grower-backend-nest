@@ -1,7 +1,7 @@
 import { FarmingRepository } from '../FarmingRepository';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/infra/database/PrismaService';
-import { CreateFarmingBody } from '../../dtos/CreateFarmingBody';
+import { CreateFarmingDTO } from '../../dtos/CreateFarmingDTO';
 
 @Injectable()
 export class PrismaFarmingRepository implements FarmingRepository {
@@ -11,7 +11,7 @@ export class PrismaFarmingRepository implements FarmingRepository {
     return await this.prisma.farmings.create(data);
   }
 
-  async update(farming_id: number, data: any): Promise<CreateFarmingBody> {
+  async update(farming_id: number, data: any): Promise<CreateFarmingDTO> {
     return await this.prisma.farmings.update({
       where: {
         id: farming_id,
@@ -23,7 +23,7 @@ export class PrismaFarmingRepository implements FarmingRepository {
     });
   }
 
-  async delete(farming_id: number): Promise<CreateFarmingBody> {
+  async delete(farming_id: number): Promise<CreateFarmingDTO> {
     return await this.prisma.farmings.delete({
       where: {
         id: farming_id,
@@ -34,7 +34,7 @@ export class PrismaFarmingRepository implements FarmingRepository {
     });
   }
 
-  async getAll(filter: any): Promise<CreateFarmingBody[]> {
+  async getAll(filter: any): Promise<CreateFarmingDTO[]> {
     return await this.prisma.farmings.findMany({
       where: filter,
       include: {
@@ -52,7 +52,7 @@ export class PrismaFarmingRepository implements FarmingRepository {
     });
   }
 
-  async getById(farming_id: number): Promise<CreateFarmingBody> {
+  async getById(farming_id: number): Promise<CreateFarmingDTO> {
     return await this.prisma.farmings.findUnique({
       where: {
         id: farming_id,
