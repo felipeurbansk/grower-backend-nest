@@ -1,4 +1,4 @@
-export class UpdateLightBody {
+export class UpdateLightDTO {
   name: string;
 
   watts: number;

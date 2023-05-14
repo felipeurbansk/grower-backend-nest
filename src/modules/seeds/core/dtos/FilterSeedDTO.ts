@@ -1,4 +1,4 @@
-export class FilterBody {
+export class FilterDTO {
   name!: string;
 
   bank_name!: string;

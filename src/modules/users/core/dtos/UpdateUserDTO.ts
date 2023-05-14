@@ -1,4 +1,4 @@
-export class UpdateUserBody {
+export class UpdateUserDTO {
   full_name: string;
 
   username: string;

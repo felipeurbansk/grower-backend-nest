@@ -1,7 +1,7 @@
 import { IsArray, IsNotEmpty, IsNumber, ValidateNested } from 'class-validator';
 import { CreatePlantDTO } from 'src/modules/plants/core/dtos/CreatePlantDTO';
 
-export class CreateFarmingBody {
+export class CreateFarmingDTO {
   @IsNotEmpty()
   @IsNumber()
   user_id: number;

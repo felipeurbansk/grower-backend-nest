@@ -1,4 +1,4 @@
-export class UpdateBody {
+export class UpdateDTO {
   name: string;
 
   bank_name: string;

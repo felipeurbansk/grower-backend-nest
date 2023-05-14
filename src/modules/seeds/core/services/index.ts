@@ -5,9 +5,9 @@ import { FilterSeedService } from './FilterSeedService';
 import { UpdateSeedService } from './UpdateSeedService';
 import { DeleteSeedService } from './DeleteSeedService';
 
-import { CreateSeedBody } from '../dtos/CreateSeedBody';
-import { FilterBody } from '../dtos/FilterSeedBody';
-import { UpdateBody } from '../dtos/UpdateSeedBody';
+import { CreateSeedDTO } from '../dtos/CreateSeedDTO';
+import { FilterDTO } from '../dtos/FilterSeedDTO';
+import { UpdateDTO } from '../dtos/UpdateSeedDTO';
 
 @Injectable()
 export class SeedService {
@@ -19,11 +19,11 @@ export class SeedService {
     private readonly deleteService: DeleteSeedService,
   ) {}
 
-  async create(@Body() data: CreateSeedBody) {
+  async create(@Body() data: CreateSeedDTO) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterBody) {
+  async get(@Body() filter: FilterDTO) {
     return await this.filterService.handle(filter);
   }
 
@@ -33,7 +33,7 @@ export class SeedService {
 
   async update(
     @Param('seed_id', ParseIntPipe) seed_id: number,
-    @Body() data: UpdateBody,
+    @Body() data: UpdateDTO,
   ) {
     return await this.updateService.handle(seed_id, data);
   }

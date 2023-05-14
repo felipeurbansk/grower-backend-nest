@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class CreateSeedBody {
+export class CreateSeedDTO {
   @IsNotEmpty()
   @IsString()
   name: string;

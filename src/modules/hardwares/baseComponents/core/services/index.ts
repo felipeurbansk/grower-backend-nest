@@ -4,9 +4,9 @@ import { GetBaseComponentByIdService } from './GetBaseComponentByIdService';
 import { FilterBaseComponentService } from './FilterBaseComponentService';
 import { UpdateBaseComponentService } from './UpdateBaseComponentService';
 
-import { CreateBaseComponentBody } from '../dtos/CreateBaseComponentBody';
-import { FilterBaseComponentBody } from '../dtos/FilterBaseComponentBody';
-import { UpdateBaseComponentBody } from '../dtos/UpdateBaseComponentBody';
+import { CreateBaseComponentDTO } from '../dtos/CreateBaseComponentDTO';
+import { FilterBaseComponentDTO } from '../dtos/FilterBaseComponentDTO';
+import { UpdateBaseComponentDTO } from '../dtos/UpdateBaseComponentDTO';
 import { DeleteBaseComponentService } from './DeleteBaseComponentService';
 
 @Injectable()
@@ -19,11 +19,11 @@ export class BaseComponentService {
     private readonly deleteService: DeleteBaseComponentService,
   ) {}
 
-  async create(@Body() data: CreateBaseComponentBody) {
+  async create(@Body() data: CreateBaseComponentDTO) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterBaseComponentBody) {
+  async get(@Body() filter: FilterBaseComponentDTO) {
     return await this.filterService.handle(filter);
   }
 
@@ -35,7 +35,7 @@ export class BaseComponentService {
 
   async update(
     @Param('base_component_id', ParseIntPipe) base_component_id: number,
-    @Body() data: UpdateBaseComponentBody,
+    @Body() data: UpdateBaseComponentDTO,
   ) {
     return await this.updateService.handle(base_component_id, data);
   }

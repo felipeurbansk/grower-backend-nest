@@ -1,8 +1,8 @@
 import { Body, Injectable, Param, ParseIntPipe } from '@nestjs/common';
 
-import { CreateUserBody } from '../dtos/CreateUserBody';
-import { FilterUserBody } from '../dtos/FilterUserBody';
-import { UpdateUserBody } from '../dtos/UpdateUserBody';
+import { CreateUserDTO } from '../dtos/CreateUserDTO';
+import { FilterUserDTO } from '../dtos/FilterUserDTO';
+import { UpdateUserDTO } from '../dtos/UpdateUserDTO';
 import { CreateUserService } from './CreateUserService';
 import { FilterUserService } from './FilterUserService';
 import { GetUserByIdService } from './GetUserByIdService';
@@ -21,11 +21,11 @@ export class UserServices {
     private readonly getUserByEmailService: GetUserByEmailService,
   ) {}
 
-  async create(@Body() data: CreateUserBody) {
+  async create(@Body() data: CreateUserDTO) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterUserBody) {
+  async get(@Body() filter: FilterUserDTO) {
     return await this.filterService.handle(filter);
   }
 
@@ -35,7 +35,7 @@ export class UserServices {
 
   async update(
     @Param('user_id', ParseIntPipe) user_id: number,
-    @Body() data: UpdateUserBody,
+    @Body() data: UpdateUserDTO,
   ) {
     return await this.updateService.handle(user_id, data);
   }

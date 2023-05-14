@@ -1,12 +1,12 @@
 import { Body, Injectable, Param, ParseIntPipe } from '@nestjs/common';
-import { CreateHumidityBody } from '../dtos/CreateHumidityBody';
 import { CreateHumidityService } from './CreateHumidityService';
 import { GetHumidityByIdService } from './GetHumidityByIdService';
 import { FilterHumidityService } from './FilterHumidityService';
 import { UpdateHumidityService } from './UpdateHumidityService';
 
-import { FilterHumidityBody } from '../dtos/FilterHumidityBody';
-import { UpdateHumidityBody } from '../dtos/UpdateHumidityBody';
+import { CreateHumidityDTO } from '../dtos/CreateHumidityDTO';
+import { FilterHumidityDTO } from '../dtos/FilterHumidityDTO';
+import { UpdateHumidityDTO } from '../dtos/UpdateHumidityDTO';
 import { DeleteHumidityService } from './DeleteHumidityService';
 
 @Injectable()
@@ -19,11 +19,11 @@ export class HumidityService {
     private readonly deleteService: DeleteHumidityService,
   ) {}
 
-  async create(@Body() data: CreateHumidityBody) {
+  async create(@Body() data: CreateHumidityDTO) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterHumidityBody) {
+  async get(@Body() filter: FilterHumidityDTO) {
     return await this.filterService.handle(filter);
   }
 
@@ -33,7 +33,7 @@ export class HumidityService {
 
   async update(
     @Param('humidty_id', ParseIntPipe) humidty_id: number,
-    @Body() data: UpdateHumidityBody,
+    @Body() data: UpdateHumidityDTO,
   ) {
     return await this.updateService.handle(humidty_id, data);
   }

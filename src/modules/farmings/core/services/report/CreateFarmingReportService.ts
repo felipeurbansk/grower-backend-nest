@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFarmingBody } from '../../dtos/CreateFarmingBody';
+import { CreateFarmingDTO } from '../../dtos/CreateFarmingDTO';
 import { addDays, addWeeks, weeksToDays } from 'date-fns';
 
 @Injectable()
 export class CreateFarmingReportService {
-  async handle(farmings: CreateFarmingBody[]): Promise<any[]> {
+  async handle(farmings: CreateFarmingDTO[]): Promise<any[]> {
     return farmings.map((farming) => {
       farming.plants = farming.plants.map((plant) => {
         const ended_germination = addDays(

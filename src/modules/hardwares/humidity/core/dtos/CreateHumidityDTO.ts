@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class CreateHumidityBody {
+export class CreateHumidityDTO {
   @IsNotEmpty()
   @IsNumber()
   base_component_id: number;

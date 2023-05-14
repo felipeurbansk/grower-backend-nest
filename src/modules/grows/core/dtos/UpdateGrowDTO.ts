@@ -1,4 +1,4 @@
-export class FilterGrowBody {
+export class UpdateGrowDTO {
   name: string;
 
   width: number;

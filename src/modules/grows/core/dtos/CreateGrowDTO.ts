@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class CreateGrowBody {
+export class CreateGrowDTO {
   @IsNotEmpty()
   name: string;
 
