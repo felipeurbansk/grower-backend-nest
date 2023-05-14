@@ -7,7 +7,7 @@ import {
   HttpCode,
 } from '@nestjs/common';
 import { AuthService } from '../core/services';
-import { AuthSignInBody } from '../core/dtos/AuthSignInBody';
+import { AuthSignInDTO } from '../core/dtos/AuthSignInDTO';
 import { Public } from '../core/decorators/Public';
 
 @Controller('auth')
@@ -17,7 +17,7 @@ export class AuthControllers {
   @Public()
   @Post('signin')
   @HttpCode(200)
-  async signIn(@Body() data: AuthSignInBody) {
+  async signIn(@Body() data: AuthSignInDTO) {
     return await this.service
       .signIn(data)
       .then((res) => {

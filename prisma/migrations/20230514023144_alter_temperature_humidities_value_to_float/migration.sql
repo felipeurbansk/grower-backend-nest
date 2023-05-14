@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "humidities" ALTER COLUMN "value" SET DATA TYPE DOUBLE PRECISION;
+
+-- AlterTable
+ALTER TABLE "temperatures" ALTER COLUMN "value" SET DATA TYPE DOUBLE PRECISION;

@@ -1,13 +1,19 @@
 import { TemperatureRepository } from '../TemperatureRepository';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/infra/database/PrismaService';
+import { CreateTemperatureDTO } from '../../dtos/CreateTemperatureDTO';
 
 @Injectable()
 export class PrismaTemperatureRepository implements TemperatureRepository {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: any): Promise<any> {
-    return await this.prisma.temperatures.create({ data });
+  async create(data: CreateTemperatureDTO): Promise<any> {
+    return await this.prisma.temperatures.create({
+      data: {
+        farming_id: data.farming_id,
+        value: parseFloat(data.value),
+      },
+    });
   }
 
   async update(temperature_id: number, data: any): Promise<any> {
