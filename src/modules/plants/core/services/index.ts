@@ -4,9 +4,9 @@ import { GetPlantByIdService } from './GetPlantByIdService';
 import { FilterPlantService } from './FilterPlantService';
 import { UpdatePlantService } from './UpdatePlantService';
 
-import { CreatePlantBody } from '../dtos/CreatePlantBody';
-import { FilterPlantBody } from '../dtos/FilterPlantBody';
-import { UpdatePlantBody } from '../dtos/UpdatePlantBody';
+import { CreatePlantDTO } from '../dtos/CreatePlantDTO';
+import { FilterPlantDTO } from '../dtos/FilterPlantDTO';
+import { UpdatePlantDTO } from '../dtos/UpdatePlantDTO';
 import { DeletePlantService } from './DeletePlantService';
 
 @Injectable()
@@ -19,11 +19,11 @@ export class PlantService {
     private readonly deletePlantService: DeletePlantService,
   ) {}
 
-  async create(@Body() data: CreatePlantBody) {
+  async create(@Body() data: CreatePlantDTO) {
     return await this.createPlantService.handle(data);
   }
 
-  async get(@Body() filter: FilterPlantBody) {
+  async get(@Body() filter: FilterPlantDTO) {
     return await this.filterPlantService.handle(filter);
   }
 
@@ -33,7 +33,7 @@ export class PlantService {
 
   async update(
     @Param('plant_id', ParseIntPipe) plant_id: number,
-    @Body() data: UpdatePlantBody,
+    @Body() data: UpdatePlantDTO,
   ) {
     return await this.updatePlantService.handle(plant_id, data);
   }

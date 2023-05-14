@@ -1,6 +1,5 @@
 import { IsArray, IsNotEmpty, IsNumber, ValidateNested } from 'class-validator';
-import { CreatePlantBody } from 'src/modules/plants/core/dtos/CreatePlantBody';
-import { CreateSeedBody } from 'src/modules/seeds/core/dtos/CreateSeedBody';
+import { CreatePlantDTO } from 'src/modules/plants/core/dtos/CreatePlantDTO';
 
 export class CreateFarmingBody {
   @IsNotEmpty()
@@ -22,5 +21,5 @@ export class CreateFarmingBody {
   @IsNotEmpty()
   @IsArray()
   @ValidateNested({ each: true })
-  plants: CreatePlantBody[];
+  plants: CreatePlantDTO[];
 }

@@ -1,8 +1,8 @@
 import { IsDate, IsNotEmpty, IsNumber } from 'class-validator';
 import { CreateSeedBody } from 'src/modules/seeds/core/dtos/CreateSeedBody';
-import { PlantReportBody } from './report/PlantReportBody';
+import { PlantReportDTO } from './report/PlantReportDTO';
 
-export class CreatePlantBody {
+export class CreatePlantDTO {
   qrcode?: string;
 
   @IsNotEmpty()
@@ -27,5 +27,5 @@ export class CreatePlantBody {
 
   seed?: CreateSeedBody;
 
-  report?: PlantReportBody;
+  report?: PlantReportDTO;
 }

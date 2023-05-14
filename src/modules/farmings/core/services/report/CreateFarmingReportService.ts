@@ -15,11 +15,6 @@ export class CreateFarmingReportService {
           plant.init_vegetative ? plant.init_vegetative : ended_germination,
           5,
         );
-
-        console.log({
-          plant: plant.init_vegetative,
-          ended_germination: ended_germination,
-        });
         const ended_flowering = addWeeks(
           plant.init_flowering ? plant.init_flowering : ended_vegetative,
           9,
