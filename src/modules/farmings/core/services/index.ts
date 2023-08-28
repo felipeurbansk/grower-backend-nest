@@ -31,6 +31,12 @@ export class FarmingService {
     return await this.getByIdService.handle(farming_id);
   }
 
+  async getByBaseComponentId(
+    @Param('base_component_id', ParseIntPipe) base_component_id: number,
+  ) {
+    return await this.getByIdService.handle(base_component_id);
+  }
+
   async update(
     @Param('farming_id', ParseIntPipe) farming_id: number,
     @Body() data: UpdateFarmingDTO,

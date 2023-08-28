@@ -8,6 +8,7 @@ import { CreateBaseComponentDTO } from '../dtos/CreateBaseComponentDTO';
 import { FilterBaseComponentDTO } from '../dtos/FilterBaseComponentDTO';
 import { UpdateBaseComponentDTO } from '../dtos/UpdateBaseComponentDTO';
 import { DeleteBaseComponentService } from './DeleteBaseComponentService';
+import { GetBaseComponentByMacService } from './GetBaseComponentByMacService';
 
 @Injectable()
 export class BaseComponentService {
@@ -15,6 +16,7 @@ export class BaseComponentService {
     private readonly createService: CreateBaseComponentService,
     private readonly filterService: FilterBaseComponentService,
     private readonly getByIdService: GetBaseComponentByIdService,
+    private readonly getByMacService: GetBaseComponentByMacService,
     private readonly updateService: UpdateBaseComponentService,
     private readonly deleteService: DeleteBaseComponentService,
   ) {}
@@ -31,6 +33,10 @@ export class BaseComponentService {
     @Param('base_component_id', ParseIntPipe) base_component_id: number,
   ) {
     return await this.getByIdService.handle(base_component_id);
+  }
+
+  async getByMac(data: FilterBaseComponentDTO) {
+    return await this.getByMacService.handle(data.mac);
   }
 
   async update(

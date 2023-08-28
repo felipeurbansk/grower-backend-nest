@@ -14,7 +14,7 @@ export class AuthSignInService {
   async handle(email: string, password: string): Promise<any> {
     const user = await this.userService.getByEmail(email);
 
-    if (!this.comparePassword.handle(password, user.password))
+    if (!await this.comparePassword.handle(password, user.password))
       throw new UnauthorizedException();
 
     delete user.password;

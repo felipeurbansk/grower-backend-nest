@@ -12,6 +12,7 @@ import { PrismaService } from '../../../infra/database/PrismaService';
 import { DecodeJWTToken } from 'src/tools/DecodeJWTToken';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { UserIdBodyInterceptor } from 'src/auth/interceptor/UserIdBodyInterceptor';
+import { GetBaseComponentByMacService } from './core/services/GetBaseComponentByMacService';
 
 @Module({
   exports: [BaseComponentService],
@@ -29,6 +30,7 @@ import { UserIdBodyInterceptor } from 'src/auth/interceptor/UserIdBodyIntercepto
     DeleteBaseComponentService,
     FilterBaseComponentService,
     GetBaseComponentByIdService,
+    GetBaseComponentByMacService,
     UpdateBaseComponentService,
     BaseComponentService,
     PrismaService,

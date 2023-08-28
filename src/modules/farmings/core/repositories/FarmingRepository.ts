@@ -4,4 +4,5 @@ export abstract class FarmingRepository {
   abstract delete(id: number): Promise<any>;
   abstract getAll(filter: any): Promise<any[]>;
   abstract getById(farming_id: number): Promise<any>;
+  abstract getByBaseComponentId(base_component_id: number): Promise<any>;
 }

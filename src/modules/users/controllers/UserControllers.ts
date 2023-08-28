@@ -14,81 +14,26 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { UserServices } from '../core/services';
+import { Public } from 'src/auth/core/decorators/Public';
 
 @Controller('users')
 export class UserControllers {
   constructor(private readonly service: UserServices) {}
 
+  @Public()
   @Post()
   async create(@Body() data: CreateUserDTO) {
-    return await this.service
-      .create(data)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when create new users.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.create(data);
   }
 
   @Get()
   async get(@Body() filter: FilterUserDTO) {
-    return await this.service
-      .get(filter)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all users.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.get(filter);
   }
 
   @Get(':user_id')
   async getById(@Param('user_id', ParseIntPipe) user_id: number) {
-    return await this.service
-      .getById(user_id)
-      .then((res) => {
-        if (!res)
-          throw new HttpException(
-            {
-              status: HttpStatus.NOT_FOUND,
-              error: `User with id ${user_id} not found.`,
-            },
-            HttpStatus.NOT_FOUND,
-          );
-
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all users.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.getById(user_id);
   }
 
   @Put(':user_id')
@@ -96,43 +41,11 @@ export class UserControllers {
     @Param('user_id', ParseIntPipe) user_id: number,
     @Body() data: UpdateUserDTO,
   ) {
-    return await this.service
-      .update(user_id, data)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when updating user with id ${user_id}.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.update(user_id, data);
   }
 
   @Delete(':user_id')
   async delete(@Param('user_id', ParseIntPipe) user_id: number) {
-    return await this.service
-      .delete(user_id)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when delete user with id ${user_id}.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.delete(user_id);
   }
 }

@@ -16,7 +16,10 @@ export class UserIdBodyInterceptor implements NestInterceptor {
 
     if (token) {
       const user = await this.decodeJWTToken.handle(context);
-      request.body['user_id'] = user.id;
+
+      if (request.route.path !== '/users') {
+        request.body['user_id'] = user.id;
+      }
     }
 
     return next.handle();

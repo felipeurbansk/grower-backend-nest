@@ -1,4 +1,10 @@
-import { Body, Injectable, Param, ParseIntPipe } from '@nestjs/common';
+import {
+  Body,
+  Injectable,
+  NotFoundException,
+  Param,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { CreateSeedService } from './CreateSeedService';
 import { GetSeedByIdService } from './GetSeedByIdService';
 import { FilterSeedService } from './FilterSeedService';
@@ -28,17 +34,32 @@ export class SeedService {
   }
 
   async getById(@Param('seed_id', ParseIntPipe) seed_id: number) {
-    return await this.getByIdService.handle(seed_id);
+    const persistedSeed = await this.getByIdService.handle(seed_id);
+
+    if (!persistedSeed)
+      throw new NotFoundException(`Seed[${seed_id}] don't exists`);
+
+    return persistedSeed;
   }
 
   async update(
     @Param('seed_id', ParseIntPipe) seed_id: number,
     @Body() data: UpdateDTO,
   ) {
+    const persistedSeed = await this.getByIdService.handle(seed_id);
+
+    if (!persistedSeed)
+      throw new NotFoundException(`Seed[${seed_id}] don't exists`);
+
     return await this.updateService.handle(seed_id, data);
   }
 
   async delete(@Param('seed_id', ParseIntPipe) seed_id: number) {
+    const persistedSeed = await this.getByIdService.handle(seed_id);
+
+    if (!persistedSeed)
+      throw new NotFoundException(`Seed[${seed_id}] don't exists`);
+
     return await this.deleteService.handle(seed_id);
   }
 }

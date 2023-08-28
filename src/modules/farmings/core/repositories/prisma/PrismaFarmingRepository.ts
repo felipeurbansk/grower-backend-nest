@@ -71,4 +71,26 @@ export class PrismaFarmingRepository implements FarmingRepository {
       },
     });
   }
+
+  async getByBaseComponentId(
+    base_component_id: number,
+  ): Promise<CreateFarmingDTO> {
+    return await this.prisma.farmings.findFirst({
+      where: {
+        base_component_id: base_component_id,
+      },
+      include: {
+        base_component: true,
+        plants: {
+          include: {
+            seed: true,
+          },
+        },
+        light: true,
+        grow: true,
+        humidities: true,
+        temperatures: true,
+      },
+    });
+  }
 }
