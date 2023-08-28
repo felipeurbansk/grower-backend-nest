@@ -1,5 +1,11 @@
-export class FilterBaseComponentDTO {
-  ip: string;
+import { IsIP, IsMACAddress, IsOptional } from 'class-validator';
 
-  mac: string;
+export class FilterBaseComponentDTO {
+  @IsOptional()
+  @IsIP()
+  ip?: string;
+
+  @IsOptional()
+  @IsMACAddress()
+  mac?: string;
 }

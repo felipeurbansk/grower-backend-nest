@@ -10,8 +10,6 @@ import {
   Put,
   ParseIntPipe,
   Delete,
-  HttpException,
-  HttpStatus,
 } from '@nestjs/common';
 import { BaseComponentService } from '../core/services';
 
@@ -21,76 +19,24 @@ export class BaseComponentControllers {
 
   @Post()
   async create(@Body() data: CreateBaseComponentDTO) {
-    return await this.service
-      .create(data)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when create new baseComponents.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.create(data);
   }
 
   @Get()
   async get(@Body() filter: FilterBaseComponentDTO) {
-    return await this.service
-      .get(filter)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all baseComponents.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.get(filter);
   }
 
   @Get(':baseComponent_id')
   async getById(
     @Param('baseComponent_id', ParseIntPipe) baseComponent_id: number,
   ) {
-    return await this.service
-      .getById(baseComponent_id)
-      .then((res) => {
-        if (!res)
-          throw new HttpException(
-            {
-              status: HttpStatus.NOT_FOUND,
-              error: `BaseComponent with id ${baseComponent_id} not found.`,
-            },
-            HttpStatus.NOT_FOUND,
-          );
+    return await this.service.getById(baseComponent_id);
+  }
 
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all baseComponents.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+  @Get('mac/:mac')
+  async getByMac(@Param() data: FilterBaseComponentDTO) {
+    return await this.service.getByMac({ mac: data.mac });
   }
 
   @Put(':baseComponent_id')
@@ -98,45 +44,13 @@ export class BaseComponentControllers {
     @Param('baseComponent_id', ParseIntPipe) baseComponent_id: number,
     @Body() data: UpdateBaseComponentDTO,
   ) {
-    return await this.service
-      .update(baseComponent_id, data)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when updating baseComponent with id ${baseComponent_id}.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.update(baseComponent_id, data);
   }
 
   @Delete(':baseComponent_id')
   async delete(
     @Param('baseComponent_id', ParseIntPipe) baseComponent_id: number,
   ) {
-    return await this.service
-      .delete(baseComponent_id)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when delete baseComponent with id ${baseComponent_id}.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.delete(baseComponent_id);
   }
 }

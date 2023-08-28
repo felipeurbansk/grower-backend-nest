@@ -1,11 +1,11 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsIP, IsMACAddress, IsNotEmpty } from 'class-validator';
 
 export class CreateBaseComponentDTO {
   @IsNotEmpty()
-  @IsString()
+  @IsIP()
   ip: string;
 
   @IsNotEmpty()
-  @IsString()
-  mac: number;
+  @IsMACAddress()
+  mac: string;
 }

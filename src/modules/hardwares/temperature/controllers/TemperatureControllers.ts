@@ -21,75 +21,17 @@ export class TemperatureControllers {
 
   @Post()
   async create(@Body() data: CreateTemperatureDTO) {
-    return await this.service
-      .create(data)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        console.log({ err });
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when create new temperatures.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.create(data);
   }
 
   @Get()
   async get(@Body() filter: FilterTemperatureDTO) {
-    return await this.service
-      .get(filter)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all temperatures.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.get(filter);
   }
 
   @Get(':temperature_id')
   async getById(@Param('temperature_id', ParseIntPipe) temperature_id: number) {
-    return await this.service
-      .getById(temperature_id)
-      .then((res) => {
-        if (!res)
-          throw new HttpException(
-            {
-              status: HttpStatus.NOT_FOUND,
-              error: `Temperature with id ${temperature_id} not found.`,
-            },
-            HttpStatus.NOT_FOUND,
-          );
-
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all temperatures.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.getById(temperature_id);
   }
 
   @Put(':temperature_id')
@@ -97,43 +39,11 @@ export class TemperatureControllers {
     @Param('temperature_id', ParseIntPipe) temperature_id: number,
     @Body() data: UpdateTemperatureDTO,
   ) {
-    return await this.service
-      .update(temperature_id, data)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when updating temperature with id ${temperature_id}.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.update(temperature_id, data);
   }
 
   @Delete(':temperature_id')
   async delete(@Param('temperature_id', ParseIntPipe) temperature_id: number) {
-    return await this.service
-      .delete(temperature_id)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when delete temperature with id ${temperature_id}.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.delete(temperature_id);
   }
 }

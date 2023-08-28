@@ -21,74 +21,24 @@ export class FarmingControllers {
 
   @Post()
   async create(@Body() data: CreateFarmingDTO) {
-    return await this.service
-      .create(data)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when create new farmings.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.create(data);
   }
 
   @Get()
   async get(@Body() filter: FilterFarmingDTO) {
-    return await this.service
-      .get(filter)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all farmings.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.get(filter);
   }
 
   @Get(':farming_id')
   async getById(@Param('farming_id', ParseIntPipe) farming_id: number) {
-    return await this.service
-      .getById(farming_id)
-      .then((res) => {
-        if (!res)
-          throw new HttpException(
-            {
-              status: HttpStatus.NOT_FOUND,
-              error: `farming with id ${farming_id} not found.`,
-            },
-            HttpStatus.NOT_FOUND,
-          );
+    return await this.service.getById(farming_id);
+  }
 
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when get all farmings.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+  @Get('base_component/:base_component_id')
+  async getByBaseComponentId(
+    @Param('base_component_id', ParseIntPipe) farming_id: number,
+  ) {
+    return await this.service.getByBaseComponentId(farming_id);
   }
 
   @Put(':farming_id')
@@ -96,43 +46,11 @@ export class FarmingControllers {
     @Param('farming_id', ParseIntPipe) farming_id: number,
     @Body() data: UpdateFarmingDTO,
   ) {
-    return await this.service
-      .update(farming_id, data)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when updating farming with id ${farming_id}.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.update(farming_id, data);
   }
 
   @Delete(':farming_id')
   async delete(@Param('farming_id', ParseIntPipe) farming_id: number) {
-    return await this.service
-      .delete(farming_id)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: `Error when delete farming with id ${farming_id}.`,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
-      });
+    return await this.service.delete(farming_id);
   }
 }
