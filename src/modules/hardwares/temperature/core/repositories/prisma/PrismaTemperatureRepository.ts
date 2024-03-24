@@ -11,7 +11,7 @@ export class PrismaTemperatureRepository implements TemperatureRepository {
     return await this.prisma.temperatures.create({
       data: {
         farming_id: data.farming_id,
-        value: parseFloat(data.value),
+        value: data.value,
       },
     });
   }

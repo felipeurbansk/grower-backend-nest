@@ -8,6 +8,7 @@ import { DeleteFarmingService } from './DeleteFarmingService';
 import { CreateFarmingDTO } from '../dtos/CreateFarmingDTO';
 import { FilterFarmingDTO } from '../dtos/FilterFarmingDTO';
 import { UpdateFarmingDTO } from '../dtos/UpdateFarmingDTO';
+import { GetFarmingByBaseComponentIdService } from './GetFarmingByBaseComponentIdService';
 
 @Injectable()
 export class FarmingService {
@@ -15,36 +16,34 @@ export class FarmingService {
     private readonly createService: CreateFarmingService,
     private readonly filterService: FilterFarmingService,
     private readonly getByIdService: GetFarmingByIdService,
+    private readonly getByBaseComponentIdService: GetFarmingByBaseComponentIdService,
     private readonly updateService: UpdateFarmingService,
     private readonly deleteService: DeleteFarmingService,
   ) {}
 
-  async create(@Body() data: CreateFarmingDTO) {
+  async create(data: CreateFarmingDTO) {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterFarmingDTO) {
+  async get(filter: FilterFarmingDTO) {
     return await this.filterService.handle(filter);
   }
 
-  async getById(@Param('farming_id', ParseIntPipe) farming_id: number) {
+  async getById(farming_id: number) {
     return await this.getByIdService.handle(farming_id);
   }
 
   async getByBaseComponentId(
     @Param('base_component_id', ParseIntPipe) base_component_id: number,
   ) {
-    return await this.getByIdService.handle(base_component_id);
+    return await this.getByBaseComponentIdService.handle(base_component_id);
   }
 
-  async update(
-    @Param('farming_id', ParseIntPipe) farming_id: number,
-    @Body() data: UpdateFarmingDTO,
-  ) {
+  async update(farming_id: number, data: UpdateFarmingDTO) {
     return await this.updateService.handle(farming_id, data);
   }
 
-  async delete(@Param('farming_id', ParseIntPipe) farming_id: number) {
+  async delete(farming_id: number) {
     return await this.deleteService.handle(farming_id);
   }
 }

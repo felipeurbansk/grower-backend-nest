@@ -11,9 +11,12 @@ import { FilterSeedService } from './FilterSeedService';
 import { UpdateSeedService } from './UpdateSeedService';
 import { DeleteSeedService } from './DeleteSeedService';
 
-import { CreateSeedDTO } from '../dtos/CreateSeedDTO';
-import { FilterDTO } from '../dtos/FilterSeedDTO';
 import { UpdateDTO } from '../dtos/UpdateSeedDTO';
+import {
+  SeedFilterInterface,
+  SeedInterface,
+  SeedUpdateInterface,
+} from '../interfaces/seed.interface';
 
 @Injectable()
 export class SeedService {
@@ -25,15 +28,15 @@ export class SeedService {
     private readonly deleteService: DeleteSeedService,
   ) {}
 
-  async create(@Body() data: CreateSeedDTO) {
+  async create(data: SeedInterface): Promise<SeedInterface> {
     return await this.createService.handle(data);
   }
 
-  async get(@Body() filter: FilterDTO) {
+  async get(filter: SeedFilterInterface): Promise<SeedInterface[]> {
     return await this.filterService.handle(filter);
   }
 
-  async getById(@Param('seed_id', ParseIntPipe) seed_id: number) {
+  async getById(seed_id: number): Promise<SeedInterface> {
     const persistedSeed = await this.getByIdService.handle(seed_id);
 
     if (!persistedSeed)
@@ -43,9 +46,9 @@ export class SeedService {
   }
 
   async update(
-    @Param('seed_id', ParseIntPipe) seed_id: number,
-    @Body() data: UpdateDTO,
-  ) {
+    seed_id: number,
+    data: SeedUpdateInterface,
+  ): Promise<SeedInterface> {
     const persistedSeed = await this.getByIdService.handle(seed_id);
 
     if (!persistedSeed)
@@ -54,7 +57,7 @@ export class SeedService {
     return await this.updateService.handle(seed_id, data);
   }
 
-  async delete(@Param('seed_id', ParseIntPipe) seed_id: number) {
+  async delete(seed_id: number): Promise<SeedInterface> {
     const persistedSeed = await this.getByIdService.handle(seed_id);
 
     if (!persistedSeed)

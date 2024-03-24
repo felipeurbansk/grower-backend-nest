@@ -7,7 +7,6 @@ export class CreateTemperatureDTO {
   farming_id: number;
 
   @IsNotEmpty()
-  @IsString()
-  // @Transform((param) => parseFloat(String(param)))
-  value: string;
+  @IsNumber()
+  value: number;
 }

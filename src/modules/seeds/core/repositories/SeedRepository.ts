@@ -1,7 +1,16 @@
+import {
+  SeedFilterInterface,
+  SeedInterface,
+  SeedUpdateInterface,
+} from '../interfaces/seed.interface';
+
 export abstract class SeedRepository {
-  abstract create(data: any): Promise<void>;
-  abstract update(id: number, data: any): Promise<any>;
-  abstract delete(id: number): Promise<any>;
-  abstract getAll(filter: any): Promise<any[]>;
-  abstract getById(seed_id: number): Promise<any>;
+  abstract create(seed: SeedInterface): Promise<SeedInterface>;
+  abstract update(
+    seed_id: number,
+    seed: SeedUpdateInterface,
+  ): Promise<SeedInterface>;
+  abstract delete(seed_id: number): Promise<SeedInterface>;
+  abstract getAll(filter: SeedFilterInterface): Promise<SeedInterface[]>;
+  abstract getById(seed_id: number): Promise<SeedInterface>;
 }
