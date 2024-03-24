@@ -11,6 +11,7 @@ import { PrismaFarmingRepository } from './core/repositories/prisma/PrismaFarmin
 import { PrismaService } from '../../infra/database/PrismaService';
 import { DecodeJWTToken } from 'src/tools/DecodeJWTToken';
 import { CreateFarmingReportService } from './core/services/report/CreateFarmingReportService';
+import { GetFarmingByBaseComponentIdService } from './core/services/GetFarmingByBaseComponentIdService';
 
 @Module({
   exports: [FarmingService],
@@ -25,6 +26,7 @@ import { CreateFarmingReportService } from './core/services/report/CreateFarming
     FilterFarmingService,
     GetFarmingByIdService,
     UpdateFarmingService,
+    GetFarmingByBaseComponentIdService,
     FarmingService,
     PrismaService,
     DecodeJWTToken,

@@ -2,20 +2,24 @@ import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class FilterDTO {
   @IsOptional()
-  @IsString()
-  name!: string;
+  @IsNumber()
+  seed_id?: number;
 
   @IsOptional()
   @IsString()
-  bank_name!: string;
+  name?: string;
+
+  @IsOptional()
+  @IsString()
+  bank_name?: string;
 
   @IsOptional()
   @IsNumber()
-  vegetative_weeks!: number;
+  vegetative_weeks?: number;
 
   @IsOptional()
   @IsNumber()
-  flowering_weeks!: number;
+  flowering_weeks?: number;
 
   @IsOptional()
   @IsNumber()

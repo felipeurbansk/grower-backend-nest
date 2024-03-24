@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateHumidityDTO {
   @IsNotEmpty()
@@ -6,6 +6,6 @@ export class CreateHumidityDTO {
   farming_id: number;
 
   @IsNotEmpty()
-  @IsString()
-  value: string;
+  @IsNumber()
+  value: number;
 }

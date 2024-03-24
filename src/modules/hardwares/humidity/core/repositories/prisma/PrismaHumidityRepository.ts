@@ -11,7 +11,7 @@ export class PrismaHumidityRepository implements HumidityRepository {
     return await this.prisma.humidities.create({
       data: {
         farming_id: data.farming_id,
-        value: parseInt(data.value),
+        value: data.value,
       },
     });
   }

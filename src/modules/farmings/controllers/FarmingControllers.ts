@@ -36,9 +36,9 @@ export class FarmingControllers {
 
   @Get('base_component/:base_component_id')
   async getByBaseComponentId(
-    @Param('base_component_id', ParseIntPipe) farming_id: number,
+    @Param('base_component_id', ParseIntPipe) base_component_id: number,
   ) {
-    return await this.service.getByBaseComponentId(farming_id);
+    return await this.service.getByBaseComponentId(base_component_id);
   }
 
   @Put(':farming_id')

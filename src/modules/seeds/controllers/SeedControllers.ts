@@ -10,8 +10,6 @@ import {
   Put,
   ParseIntPipe,
   Delete,
-  HttpException,
-  HttpStatus,
 } from '@nestjs/common';
 import { SeedService } from '../core/services';
 
